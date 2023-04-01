@@ -13,7 +13,7 @@ class DistilleriesController < ApplicationController
     private
     
     def distillery_params
-        params.permit(:name, :image_url)
+        params.permit(:name)
     end
 
 end
