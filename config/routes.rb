@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :notes
+  resources :notes, only: [:index, :create, :destroy]
   resources :bottles
   resources :users, only: [:show, :create]
   resources :distilleries, only: [:index, :create]
