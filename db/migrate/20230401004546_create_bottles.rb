@@ -3,7 +3,7 @@ class CreateBottles < ActiveRecord::Migration[6.1]
     create_table :bottles do |t|
       t.string :name
       t.string :origin
-      t.integer :year
+      t.string :year
       t.integer :price
       t.integer :rating
       t.string :image_url

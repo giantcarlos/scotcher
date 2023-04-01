@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2023_04_01_004620) do
   create_table "bottles", force: :cascade do |t|
     t.string "name"
     t.string "origin"
-    t.integer "year"
+    t.string "year"
     t.integer "price"
     t.integer "rating"
     t.string "image_url"
