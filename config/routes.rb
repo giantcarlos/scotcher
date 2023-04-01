@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :notes
   resources :bottles
-  resources :users, only: [:show. :create]
+  resources :users, only: [:show, :create]
   resources :distilleries, only: [:index, :create]
 
   get '/me', to: 'users#show'
