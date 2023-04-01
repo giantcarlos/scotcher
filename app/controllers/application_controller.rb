@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
   end
 
   def no_route
-    render json: {error: "Title not found"}, status: :not_found
+    render json: {error: "Not found"}, status: :not_found
   end
 
 
