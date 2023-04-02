@@ -5,6 +5,11 @@ class BottlesController < ApplicationController
         render json: bottle, status: :found
     end
 
+    def index
+        bottles = Bottle.all
+        render json: bottles, status: :found
+    end
+
     def create
         bottle = @current_user.bottles.create!(bottle_params)
         render json: bottle, status: :created
