@@ -1,6 +1,12 @@
-import createSlice from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const distillerySlice = createSlice({
+export const fetchDistilleries = createAsyncThunk("distilleries/fetchDistilleries", () => {
+    return fetch("/distilleries")
+        .then((response) => response.json())
+        .then((data) => data);
+})
+
+const distilleriesSlice = createSlice({
     name: "distilleries",
     initialState: {
         entities: [], 
@@ -13,6 +19,6 @@ const distillerySlice = createSlice({
     },
 })
 
-export const { distilleryAdded } = distillerySlice.actions;
+export const { distilleryAdded } = distilleriesSlice.actions;
 
-export default distillerySlice.reducer;
+export default distilleriesSlice.reducer;
