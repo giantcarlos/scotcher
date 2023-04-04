@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchSessions } from './features/sessionsSlice';
 import { fetchBottles } from './features/bottlesSlice';
 import { fetchDistilleries } from './features/distilleriesSlice';
@@ -13,12 +13,11 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.sessions.entities);
 
   useEffect (() => {
     dispatch(fetchSessions())
-      .then(dispatch(fetchBottles()))
-      .then(dispatch(fetchDistilleries()))
+      // .then(dispatch(fetchBottles()))
+      // .then(dispatch(fetchDistilleries()))
   }, [dispatch]);
 
 

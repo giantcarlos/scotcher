@@ -21,6 +21,15 @@ const bottlesSlice = createSlice({
             bottle = action.payload;
         }
     },
+    extraReducers: {
+        [fetchBottles.pending](state) {
+            state.status = "loading";
+        },
+        [fetchBottles.fulfilled](state, action) {
+            state.entities = action.payload;
+            state.status = "idle"
+        },
+    },
 })
 
 export const { bottleAdded, bottleUpdated } = bottlesSlice.actions;
