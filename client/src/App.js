@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSessions } from './features/sessionsSlice';
+import { fetchBottles } from './features/bottlesSlice';
+import { fetchDistilleries } from './features/distilleriesSlice';
 import Home from './Components/Home';
-import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import NavBar from './Components/NavBar';
 import Journal from './Components/Journal';
@@ -8,6 +11,16 @@ import BottleForm from './Components/BottleForm';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.esessions.entities);
+
+  useEffect (() => {
+    dispatch(fetchSessions())
+      .then(dispatch(fetchBottles))
+      .then(dispatch(fetchDistilleries))
+  }, [dispatch]);
+
+
   return (
     <div>
       <NavBar />
