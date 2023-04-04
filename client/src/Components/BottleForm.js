@@ -6,4 +6,4 @@ function BottleForm() {
   )
 }
 
-export default BottleForm
+export default BottleForm;
