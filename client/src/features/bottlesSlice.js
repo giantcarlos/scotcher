@@ -18,7 +18,7 @@ const bottlesSlice = createSlice({
         },
         bottleUpdated(state, action) {
             const bottle = state.entities.find((bottle) => bottle.id === action.payload.id);
-            bottle.url = action.payload.url;
+            bottle = action.payload;
         }
     },
 })
