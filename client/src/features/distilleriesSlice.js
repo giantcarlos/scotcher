@@ -1,9 +1,15 @@
-import React from 'react'
+const initialState = {
+    entities: [], 
+    status: "idle",
+};
 
-function distilleriesSlice() {
-  return (
-    <div>distilleriesSlice</div>
-  )
-}
+function distilleriesReducer (state = initialState, action) {
+    switch (action.type) {
+        case "distilleries/distileryAdded":
+            return {
+                ...state,
+                entities: [...state.entities, action.payload],
+            }
+}}
 
-export default distilleriesSlice
+export default distilleriesReducer;
