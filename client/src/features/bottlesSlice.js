@@ -1,27 +1,20 @@
-const initialState = {
-    entities: [], 
-    status: "idle",
-};
+import createSlice from "@reduxjs/toolkit";
 
-function bottlesReducer (state = initialState, action) {
-    switch (action.type) {
-        case "bottles/bottleAdded":
-            return {
-                ...state,
-                entities: [...state.entities, action.payload],
-            }
-        case "bottles/bottleRemoved":
-            return {
-                ...state,
-                entities: state.entities.filter((bottle) => bottle.id !== action.payload),
-            }
-        case "bottles/bottleUpdated":
-            return {
-                ...state,
-                entities: state.entities.map((bottle) =>
-                    bottle.id === action.payload.id ? action.payload : bottle
-                ),
-            }
-}}
+const bottlesSlice = createSlice({
+    name: "bottles",
+    initialState: {
+        entities: [], 
+        status: "idle",
+    },
+    reducer: {
+        bottleAdded(state, action) {
+            state.entities.push(action.payload);
+        },
+        bottleUpdated(state, action) {
+            const bottle = state.entities.find((bottle) => bottle.id === action.payload.id);
+            bottle.url = action.payload.url;
+        }
+    },
+})
 
-export default bottlesReducer;
+export default bottlesSlice.reducer;

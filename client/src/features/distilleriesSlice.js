@@ -1,15 +1,16 @@
-const initialState = {
-    entities: [], 
-    status: "idle",
-};
+import createSlice from "@reduxjs/toolkit";
 
-function distilleriesReducer (state = initialState, action) {
-    switch (action.type) {
-        case "distilleries/distileryAdded":
-            return {
-                ...state,
-                entities: [...state.entities, action.payload],
-            }
-}}
+const distillerySlice = createSlice({
+    name: "distilleries",
+    initialState: {
+        entities: [], 
+        status: "idle",
+    },
+    reducer: {
+        distilleryAdded(state, action) {
+            state.entities.push(action.payload);
+        }
+    },
+})
 
-export default distilleriesReducer;
+export default bottlesSlice.reducer;
