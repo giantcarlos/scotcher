@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSessions } from './features/sessionsSlice';
@@ -12,12 +13,12 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.esessions.entities);
+  const user = useSelector(state => state.sessions.entities);
 
   useEffect (() => {
     dispatch(fetchSessions())
-      .then(dispatch(fetchBottles))
-      .then(dispatch(fetchDistilleries))
+      .then(dispatch(fetchBottles()))
+      .then(dispatch(fetchDistilleries()))
   }, [dispatch]);
 
 
