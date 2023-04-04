@@ -13,4 +13,6 @@ const distillerySlice = createSlice({
     },
 })
 
-export default bottlesSlice.reducer;
+export const { distilleryAdded } = distillerySlice.actions;
+
+export default distillerySlice.reducer;

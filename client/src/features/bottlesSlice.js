@@ -17,4 +17,6 @@ const bottlesSlice = createSlice({
     },
 })
 
+export const { bottleAdded, bottleUpdated } = bottleSlice.actions;
+
 export default bottlesSlice.reducer;
