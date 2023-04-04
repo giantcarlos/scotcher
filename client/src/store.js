@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// import bottlesReducer from './features/bottles/bottlesSlice'
+import bottlesReducer from './features/bottlesSlice'
+import distilleriesReducer from './features/distilleriesSlice'
+import sessionsReducer from './features/sessionsSlice'
 
 const store = configureStore({
     reducer: {
-        // bottles: bottlesReducer,
+        bottles: bottlesReducer,
+        distilleries: distilleriesReducer,
+        sessions: sessionsReducer
     },
 });
 
