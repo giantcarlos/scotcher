@@ -1,9 +1,24 @@
-import React from 'react'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-function sessionsSlice() {
-  return (
-    <div>sessionsSlice</div>
-  )
-}
+export const fetchSessions = createAsyncThunk("distilleries/fetchDistilleries", () => {
+    return fetch("/me")
+        .then((response) => response.json())
+        .then((data) => data);
+})
 
-export default sessionsSlice;
+const sessionsSlice = createSlice({
+    name: "sessions",
+    initialState: {
+        entities: [], 
+        status: "idle",
+    },
+    reducer: {
+        sessionsAdded(state, action) {
+            state.entities.push(action.payload);
+        }
+    },
+})
+
+export const { sessionsAdded } = sessionsSlice.actions;
+
+export default sessionsSlice.reducer;
