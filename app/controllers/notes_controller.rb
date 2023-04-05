@@ -21,5 +21,6 @@ class NotesController < ApplicationController
         
     def note_params
         params.permit(:bottle_id, :comment)
+    end
 
 end
