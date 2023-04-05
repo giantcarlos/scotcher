@@ -6,7 +6,7 @@ class BottlesController < ApplicationController
     end
 
     def index
-        bottles = Bottle.all
+        bottles = current_user.bottles.all.order(:name)
         render json: bottles, status: :found
     end
 

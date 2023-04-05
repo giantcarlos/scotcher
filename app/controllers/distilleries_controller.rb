@@ -1,7 +1,7 @@
 class DistilleriesController < ApplicationController
 
     def index
-        distilleries = Distillery.all.order(:name)
+        distilleries = current_user.distilleries.all.order(:name)
         render json: distilleries, status: :found
     end
     
