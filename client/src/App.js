@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchSessions } from './features/sessionsSlice';
-import { fetchBottles } from './features/bottlesSlice';
 import { fetchDistilleries } from './features/distilleriesSlice';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
@@ -16,7 +15,6 @@ function App() {
 
   useEffect (() => {
     dispatch(fetchSessions())
-      .then(dispatch(fetchBottles()))
       .then(dispatch(fetchDistilleries()))
   }, [dispatch]);
 
