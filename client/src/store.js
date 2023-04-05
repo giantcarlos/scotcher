@@ -8,7 +8,7 @@ const store = configureStore({
     reducer: {
         bottles: bottlesReducer,
         distilleries: distilleriesReducer,
-        sessions: sessionsReducer
+        sessions: sessionsReducer,
     },
 });
 

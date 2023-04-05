@@ -1,18 +1,18 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { sesssionsDeleted } from '../features/sessionsSlice';
+import { fetchSessions } from '../features/sessionsSlice';
 
 function NavBar() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.sessions.entities)
 
   function handleLogout() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        dispatch(sesssionsDeleted);
-      }
-    });
+    fetch("/logout", { 
+      method: "DELETE", 
+    }).then(() => {
+        dispatch(fetchSessions());
+      });
   }
 
   return (

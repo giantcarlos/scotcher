@@ -16,7 +16,7 @@ const sessionsSlice = createSlice({
         sessionsAdded(state, action) {
             state.entities = action.payload;
         },
-        seassionsDeleted(state) {
+        sessionsDeleted(state) {
             state.entities = {};
         }
     },
@@ -31,6 +31,6 @@ const sessionsSlice = createSlice({
     },
 });
 
-export const { sessionsAdded, sesssionsDeleted } = sessionsSlice.actions;
+export const { sessionsAdded, sessionsDeleted } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;

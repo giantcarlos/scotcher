@@ -18,7 +18,7 @@ function App() {
     dispatch(fetchSessions())
       .then(dispatch(fetchBottles()))
       .then(dispatch(fetchDistilleries()))
-  });
+  }, [dispatch]);
 
 
   return (
