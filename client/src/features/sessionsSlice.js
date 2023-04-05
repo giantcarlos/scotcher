@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchSessions = createAsyncThunk("distilleries/fetchDistilleries", () => {
+export const fetchSessions = createAsyncThunk("sessions/fetchSessions", () => {
     return fetch("/me")
         .then((response) => response.json())
         .then((data) => data);
@@ -9,12 +9,12 @@ export const fetchSessions = createAsyncThunk("distilleries/fetchDistilleries", 
 const sessionsSlice = createSlice({
     name: "sessions",
     initialState: {
-        entities: [], 
+        entities: {}, 
         status: "idle",
     },
     reducer: {
         sessionsAdded(state, action) {
-            state.entities.push(action.payload);
+            state.entities = action.payload;
         }
     },
     extraReducers: {
