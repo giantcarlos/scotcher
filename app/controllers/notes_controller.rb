@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
 
     def index
-        notes = @current_user.bottles.notes.all
+        notes = current_user.bottles.notes.all
         render json: notes, status: :found
     end
 

@@ -41,6 +41,17 @@ nav a:hover {
   color: #bbb
 }
 
+nav .login-btn {
+  font-family: inherit;
+  border: none;
+  font-size: 1.2rem;
+  background-color: #fff;
+  color: #111;
+  cursor: pointer;
+  position:absolute;
+  right: 2rem;
+}
+
 .login-form {
   margin: 0 auto;
   margin-top: 5rem;

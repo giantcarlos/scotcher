@@ -15,6 +15,9 @@ const sessionsSlice = createSlice({
     reducer: {
         sessionsAdded(state, action) {
             state.entities = action.payload;
+        },
+        seassionsDeleted(state) {
+            state.entities = {};
         }
     },
     extraReducers: {
@@ -28,6 +31,6 @@ const sessionsSlice = createSlice({
     },
 });
 
-export const { sessionsAdded } = sessionsSlice.actions;
+export const { sessionsAdded, sesssionsDeleted } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;

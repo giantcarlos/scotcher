@@ -1,7 +1,7 @@
 class BottlesController < ApplicationController
 
     def show
-        bottle = @current_user.bottles.find_by(id: params[:id])
+        bottle = current_user.bottles.find_by(id: params[:id])
         render json: bottle, status: :found
     end
 
@@ -11,12 +11,12 @@ class BottlesController < ApplicationController
     end
 
     def create
-        bottle = @current_user.bottles.create!(bottle_params)
+        bottle = current_user.bottles.create!(bottle_params)
         render json: bottle, status: :created
     end
 
     def update
-        book = @current_user.books.find_by(id: params[:id])
+        book = current_user.books.find_by(id: params[:id])
         book.update!(book_params)
         render json: book
     end
