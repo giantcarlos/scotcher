@@ -14,7 +14,7 @@ function Home() {
   return (
     <div>
       <div className="counter"><br />Welcome {user.username}!<br /><br /><br /><br/>
-        <div>{latestBottles.length===0 ? "You don't have any logged scotch yet. Add some to your collection." : "Here are your latest scotch entries:"}</div>
+        <div>{latestBottles.length===0 ? "You don't have any logged scotch yet. Add some to your collection." : "Here are your most recent scotch entries:"}</div>
       </div>
       <div className="card-grid">{bottleCards()}</div>
     </div>
