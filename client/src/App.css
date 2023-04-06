@@ -136,3 +136,40 @@ div {
   font-size: 1.1rem;
   font-weight: bold;
  }
+
+ .book-container {
+  max-width: 750px;
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ .book-img {
+  float: right;
+ }
+
+ .book-img > img {
+  width: 300px;
+  max-height: auto;
+ }
+
+ .book-details {
+  margin-top: 2.5rem;
+  font-size: 1.1rem;
+ }
+
+ .book-btn {
+  font-family: inherit;
+  padding: .3rem 2rem;
+  background-color: white;
+  margin-top: 10rem;
+  margin-bottom: .75rem;
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+
+.book-btn:hover, .formBtn:focus {
+  background: #ddd;
+  color: #111;
+  cursor: pointer;
+}
