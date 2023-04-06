@@ -111,6 +111,53 @@ div {
   text-align: center;
 }
 
+.card-grid {
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.card-grid a {
+  text-decoration: none;
+}
+
+.card {
+  max-width: 400px;
+  padding: 1rem;
+  text-align: center;
+  background: white;
+  border-radius: .25rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 2);
+  color: #222
+}
+
+.card-img {
+  overflow: hidden;
+}
+
+.card-img > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  object-fit: fill;
+  object-position: center;
+  transition: 200ms transform ease-in-out;
+}
+
+.card:hover > .card-img > img {
+  transform: scale(1.025);
+}
+
+.card-name {
+  font-family: inherit;
+  padding: .5rem;
+}
+
 .distillery-list {
   margin-top: 2rem;
   margin-left: 3rem;
