@@ -150,6 +150,7 @@ function BottleForm() {
         {errors ? (errors.map((error) => {return <p className="errors">{error}</p>})) : null}
       </form>
       <Link to={"/distilleries/new"} className="sign-link">Don't see a distillery on our list? Add one here.</Link>
+      <br /><br /><br />
     </div>
   )
 }
