@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function BottleCard({ bottle }) {
   return (
-    <Link to={`/botlles/${bottle.id}`}>
+    <Link to={`/bottles/${bottle.id}`}>
         <div className="card">
             <div className="card-img">
                 <img src={bottle.image_url} alt="Not found."/>

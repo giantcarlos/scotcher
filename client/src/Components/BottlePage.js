@@ -19,7 +19,7 @@ function BottlePage() {
             <p>Distillery: {bottle?.distillery.name}</p>
             <p>Year: {bottle?.year}</p>
             <p>Origin: {bottle?.origin}</p>
-            <p>Price: {bottle?.price}</p>
+            <p>Price: ${bottle?.price}</p>
             <p>Your Rating: {bottle?.rating}</p>
         </div>
         {/* <Link to={`/bottles/${id}/edit`}>

@@ -144,7 +144,7 @@ div {
   display: block;
   width: 100%;
   aspect-ratio: 8.5 / 11;
-  object-fit: fill;
+  object-fit: contain;
   object-position: center;
   transition: 200ms transform ease-in-out;
 }
@@ -184,28 +184,28 @@ div {
   font-weight: bold;
  }
 
- .book-container {
+ .bottle-container {
   max-width: 750px;
   margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;
 }
 
- .book-img {
+ .bottle-img {
   float: right;
  }
 
- .book-img > img {
+ .bottle-img > img {
   width: 300px;
   max-height: auto;
  }
 
- .book-details {
+ .bottle-details {
   margin-top: 2.5rem;
   font-size: 1.1rem;
  }
 
- .book-btn {
+ .bottle-btn {
   font-family: inherit;
   padding: .3rem 2rem;
   background-color: white;
@@ -215,7 +215,7 @@ div {
   margin-left: .75rem;
 }
 
-.book-btn:hover, .formBtn:focus {
+.bottle-btn:hover, .formBtn:focus {
   background: #ddd;
   color: #111;
   cursor: pointer;
