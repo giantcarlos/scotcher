@@ -110,3 +110,29 @@ input {
 div {
   text-align: center;
 }
+
+.distillery-list {
+  margin-top: 2rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+}
+
+.distillery-list a {
+  color: #222;
+  text-decoration: none;
+  line-height: 1.75;
+}
+
+.distillery-list a:hover {
+  color: #bbb
+}
+
+.counter {
+  margin-top: 2rem;
+  margin-left: 3rem;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+ }

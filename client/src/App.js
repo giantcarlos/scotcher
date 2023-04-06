@@ -6,7 +6,8 @@ import { fetchDistilleries } from './features/distilleriesSlice';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import NavBar from './Components/NavBar';
-import Journal from './Components/Journal';
+import Distilleries from './Components/Distilleries';
+import DistilleryPage from './Components/DistilleryPage';
 import BottleForm from './Components/BottleForm';
 import './App.css';
 
@@ -25,7 +26,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/distilleries" element={<Journal />} />
+        <Route exact path="/distilleries" element={<Distilleries />} />
+        <Route exact path="/distilleries/:id" element={<DistilleryPage />} />
         <Route exact path="/bottles/new" element={<BottleForm />} />
       </Routes>
     </div>
