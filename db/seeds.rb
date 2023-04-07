@@ -48,6 +48,7 @@ Note.create(bottle_id: macallan12.id, comment: "Wedding present from Dof and Tri
 Note.create(bottle_id: macallan15.id, comment: "Wedding present from David Lehrer.")
 Note.create(bottle_id: white.id, comment: "Wedding present from Justin Anderson.")
 Note.create(bottle_id: laphroaig10.id, comment: "Birthday present to Verity from Kacy Ewing.")
+Note.create(bottle_id: laphroaig10.id, comment: "Ron Swanson's favorite Scotch brand.")
 Note.create(bottle_id: lagavulin16.id, comment: "Wedding present from Dof and Trixie.")
 Note.create(bottle_id: hpark.id, comment: "Wedding present from Josh Thompson.")
 Note.create(bottle_id: dewar15.id, comment: "House warming present from Jon and Sarah Ambrose.")
