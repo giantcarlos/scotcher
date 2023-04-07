@@ -196,7 +196,7 @@ div {
  }
 
  .bottle-img > img {
-  width: 300px;
+  width: 350px;
   max-height: auto;
  }
 
@@ -209,7 +209,7 @@ div {
   font-family: inherit;
   padding: .3rem 2rem;
   background-color: white;
-  margin-top: 6rem;
+  margin-top: 1.5rem;
   margin-bottom: .75rem;
   margin-right: .75rem;
   margin-left: .75rem;
@@ -219,4 +219,9 @@ div {
   background: #ddd;
   color: #111;
   cursor: pointer;
+}
+
+.comment {
+  margin-top: 3rem;
+  font-style: italic;
 }

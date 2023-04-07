@@ -33,6 +33,10 @@ function BottlePage() {
               <button className="bottle-btn">Edit Bottle</button>
         </Link>
         <button className="bottle-btn" onClick={handleDelete}>Delete Bottle</button>
+        <button className="bottle-btn" onClick={handleDelete}>Add Note</button>
+        {bottle?.notes.map(n =>(
+            <h3 className="comment" key="id">"{n.comment}"</h3>
+        ))}
     </div>
   )
 }
