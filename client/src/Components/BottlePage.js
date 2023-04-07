@@ -7,8 +7,10 @@ function BottlePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const bottles = useSelector(state => state.bottles.entities)
-    const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
+    const bottles = useSelector(state => state.bottles.entities);
+    const notes = useSelector(state => state.notes.entities);
+    const bottleNotes = notes.filter(note => note.bottle_id===parseInt(id))
+    const bottle = bottles?.find(bottle => bottle.id===parseInt(id));
 
     const handleDelete = () => {
         fetch(`/bottles/${id}`, { method: "DELETE" })
@@ -36,7 +38,7 @@ function BottlePage() {
         <Link to={`/bottles/${id}/notes/new`}>
             <button className="bottle-btn">Add Note</button>
         </Link>
-        {bottle?.notes.map(n =>(
+        {bottleNotes?.map(n =>(
             <h3 className="comment" key={n.id}>"{n.comment}"</h3>
         ))}
     </div>

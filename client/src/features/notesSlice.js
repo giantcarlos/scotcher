@@ -6,7 +6,7 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", () => {
         .then((data) => data);
 })
 
-const distilleriesSlice = createSlice({
+const notesSlice = createSlice({
     name: "notes",
     initialState: {
         entities: [], 
