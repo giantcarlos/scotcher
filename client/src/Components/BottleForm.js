@@ -6,9 +6,9 @@ import Login from './Login';
 
 function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
-  const dispatch = useDispatch();
-  const distilleries = useSelector(state => state.distilleries.entities)
+  const allDistilleries = useSelector(state => state.allDistilleries.entities)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [ errors, setErrors ] = useState(null);
   const [ formData, setFormData ] = useState({
     distillery_id: "",
@@ -41,7 +41,8 @@ function BottleForm() {
     setFormData({
         ...formData,
         [e.target.id]: e.target.value
-    })}
+    })
+  }
 
   if (!user) return <Login />;
 
@@ -67,7 +68,7 @@ function BottleForm() {
               onChange={handleChange}
             >
               <option value=""></option>
-              {distilleries.map(d => (
+              {allDistilleries.map(d => (
                 <option key={d.id} value={d.id}>
                   {d.name}
                 </option>

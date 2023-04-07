@@ -18,7 +18,7 @@ const sessionsSlice = createSlice({
         },
         sessionsDeleted(state) {
             state.entities = null;
-        }
+        },
     },
     extraReducers: {
         [fetchSessions.pending](state) {
@@ -31,6 +31,6 @@ const sessionsSlice = createSlice({
     },
 });
 
-export const { sessionsAdded, sessionsDeleted } = sessionsSlice.actions;
+export const { sessionsAdded, sessionsDeleted, sessionsBottleDeleted } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;
