@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchDistilleries } from '../features/distilleriesSlice';
+import { distilleryAdded } from '../features/distilleriesSlice';
 
 function DistilleriesForm() {
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ function DistilleriesForm() {
           body: JSON.stringify({name}),
         }).then((r) => {
           if (r.ok) {
-            r.json().then((data) => dispatch(fetchDistilleries(data)))
+            r.json().then((data) => dispatch(distilleryAdded(data)))
             navigate('/bottles/new');
           } else {
             r.json().then((err) => setErrors(err.errors));
