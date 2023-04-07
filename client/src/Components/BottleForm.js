@@ -158,11 +158,10 @@ function BottleForm() {
             />
             </label>
         </div>
-        <button className="form-btn" type="submit">S U B M I T</button>
+        <button className="form-btn" type="submit">S U B M I T</button> <br /><br />
         {errors ? (errors.map((error) => {return <p className="errors">{error}</p>})) : null}
+        <Link to={"/distilleries/new"} className="sign-link">Don't see a distillery on our list? Add one here.</Link><br /><br />
       </form>
-      <Link to={"/distilleries/new"} className="sign-link">Don't see a distillery on our list? Add one here.</Link>
-      <br /><br /><br />
     </div>
   )
 }

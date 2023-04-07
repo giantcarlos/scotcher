@@ -5,11 +5,13 @@
 body {
   margin: 0;
   font-family: 'Georgia';
+  font-weight: bold;
   color: #222
 }
 
 nav {
   font-size: 1.2rem;
+  font-weight: 300;
   background-color: #fff;
   color: #111;
   display: flex;
@@ -65,6 +67,7 @@ nav .login-btn {
 }
 
 .form-text {
+  font-weight: 300;
   padding-left: 5rem;
   padding-right: 5rem;
   margin-top: 2rem;
@@ -163,6 +166,7 @@ div {
   margin-left: 3rem;
   margin-right: 3rem;
   margin-bottom: 3rem;
+  line-height: 2.5;
 }
 
 .distillery-list a {
@@ -225,4 +229,26 @@ div {
 .comment {
   margin-top: 3rem;
   font-style: italic;
+}
+
+.background {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  isolation: isolate;
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  isolation: isolate;
+}
+
+.background::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  isolation: isolate;
+  background: lavender;
+  opacity: .85;
 }

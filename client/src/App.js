@@ -31,7 +31,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className="background" style={{backgroundImage: "url(/scotchbg.png)"}}>
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
