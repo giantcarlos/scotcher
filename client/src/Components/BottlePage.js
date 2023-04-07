@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { bottleDeleted } from '../features/bottlesSlice';
+import { distilleryDeleted } from '../features/distilleriesSlice';
 
 function BottlePage() {
     const navigate = useNavigate();
@@ -9,13 +10,23 @@ function BottlePage() {
     const { id } = useParams();
     const bottles = useSelector(state => state.bottles.entities);
     const notes = useSelector(state => state.notes.entities);
+    const allDistilleries = useSelector(state => state.allDistilleries.entities)
     const bottleNotes = notes.filter(note => note.bottle_id===parseInt(id))
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id));
 
     const handleDelete = () => {
         fetch(`/bottles/${id}`, { method: "DELETE" })
-        dispatch(bottleDeleted(bottle.id))
+        removeBottle(bottle)
         navigate('/distilleries')
+    }
+
+    const removeBottle = (bottle) => {
+        dispatch(bottleDeleted(bottle.id))
+        const distillery = allDistilleries.find(d => d.id===bottle.distillery_id)
+        const distilleryExists = bottles.findIndex(b => b.distillery_id===bottle.distillery_id) > -1;
+        if (distilleryExists) {
+          dispatch(distilleryDeleted(distillery))
+        }
     }
 
   return (

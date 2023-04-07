@@ -15,7 +15,10 @@ const distilleriesSlice = createSlice({
     reducers: {
         distilleryAdded(state, action) {
             state.entities.push(action.payload);
-        }
+        },
+        distilleryDeleted(state, action) {
+            state.entities = state.entities.filter((d) => d.id !== action.payload.id);
+        },
     },
     extraReducers: {
         [fetchDistilleries.pending](state) {
@@ -28,6 +31,6 @@ const distilleriesSlice = createSlice({
     },
 })
 
-export const { distilleryAdded } = distilleriesSlice.actions;
+export const { distilleryAdded, distilleryDeleted } = distilleriesSlice.actions;
 
 export default distilleriesSlice.reducer;
