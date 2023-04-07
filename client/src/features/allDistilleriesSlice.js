@@ -13,7 +13,7 @@ const allDistilleriesSlice = createSlice({
         status: "idle",
     },
     reducers: {
-        distilleryAdded(state, action) {
+        allDistilleryAdded(state, action) {
             state.entities.push(action.payload);
         }
     },
@@ -28,6 +28,6 @@ const allDistilleriesSlice = createSlice({
     },
 })
 
-export const { distilleryAdded } = allDistilleriesSlice.actions;
+export const { allDistilleryAdded } = allDistilleriesSlice.actions;
 
 export default allDistilleriesSlice.reducer;

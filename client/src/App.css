@@ -196,13 +196,14 @@ div {
  }
 
  .bottle-img > img {
-  width: 350px;
-  max-height: auto;
+  width: auto;
+  max-height: 400px;
  }
 
  .bottle-details {
   margin-top: 2.5rem;
   font-size: 1.1rem;
+  margin-bottom: 2rem;
  }
 
  .bottle-btn {

@@ -69,8 +69,8 @@ function BottleForm() {
             >
               <option value=""></option>
               {allDistilleries.map(d => (
-                <option key={d.id} value={d.id}>
-                  {d.name}
+                <option key={d?.id} value={d?.id}>
+                  {d?.name}
                 </option>
               ))}
             </select>
