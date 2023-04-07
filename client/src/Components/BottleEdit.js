@@ -51,7 +51,7 @@ function BottleEdit() {
   return (
     <div>
       <form className="login-form" onSubmit={handleSubmit}>
-        <h3>Edit {bottle.edit}:</h3>
+        <h3>Edit {bottle.name}</h3>
         <div className="form-text">
           <label htmlFor="name">Name: 
             <input 

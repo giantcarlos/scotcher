@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDistilleries } from '../features/distilleriesSlice';
+import { fetchBottles } from '../features/bottlesSlice';
 
 function BottlePage() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function BottlePage() {
     const handleDelete = () => {
         fetch(`/books/${id}`, 
             { method: "DELETE" })
-        .then(() => dispatch(fetchDistilleries(id)))
+        .then(() => dispatch(fetchBottles()))
         .then(() => navigate(`/distilleries/${distillery.id}`));
     }
 

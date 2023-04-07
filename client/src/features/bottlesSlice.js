@@ -19,6 +19,10 @@ const bottlesSlice = createSlice({
         bottleUpdated(state, action) {
             const bottle = state.entities.find((bottle) => bottle.id === action.payload.id);
             bottle = action.payload;
+        },
+        bottleDeleted(state, action) {
+            const { id } = action.payload;
+            state.entities = state.entities.find((bottle) => bottle.id !== id);
         }
     },
     extraReducers: {
@@ -32,6 +36,6 @@ const bottlesSlice = createSlice({
     },
 })
 
-export const { bottleAdded, bottleUpdated } = bottlesSlice.actions;
+export const { bottleAdded, bottleUpdated, bottleDeleted } = bottlesSlice.actions;
 
 export default bottlesSlice.reducer;
