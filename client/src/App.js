@@ -20,7 +20,7 @@ function App() {
   useEffect (() => {
     dispatch(fetchSessions())
       .then(dispatch(fetchDistilleries()))
-  });
+  }, [dispatch]);
 
 
   return (
