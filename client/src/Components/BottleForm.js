@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { bottleAdded } from '../features/bottlesSlice';
 import Login from './Login';
+import { distilleryAdded } from '../features/distilleriesSlice';
 
 function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
+  const distilleries = useSelector(state => state.distilleries.entities)
   const allDistilleries = useSelector(state => state.allDistilleries.entities)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,12 +32,21 @@ function BottleForm() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => dispatch(bottleAdded(data)))
+        r.json().then((data) => addBottle(data))
         navigate('/distilleries');
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
     })}
+
+    const addBottle = (data) => {
+      dispatch(bottleAdded(data))
+      const distillery = allDistilleries.find(d => d.id===data.distillery_id)
+      const distilleryExists = distilleries.findIndex(d => d.id ===data.distillery_id) > -1;
+        if (!distilleryExists) {
+          dispatch(distilleryAdded(distillery))
+        }
+    }
 
   const handleChange = (e) => {
     setFormData({
