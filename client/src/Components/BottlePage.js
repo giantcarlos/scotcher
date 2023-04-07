@@ -37,7 +37,7 @@ function BottlePage() {
             <button className="bottle-btn">Add Note</button>
         </Link>
         {bottle?.notes.map(n =>(
-            <h3 className="comment" key="bottle.notes.id">"{n.comment}"</h3>
+            <h3 className="comment" key={n.id}>"{n.comment}"</h3>
         ))}
     </div>
   )

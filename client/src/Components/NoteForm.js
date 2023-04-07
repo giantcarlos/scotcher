@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { noteAdded } from '../features/bottlesSlice';
-import { v4 as uuid } from "uuid";
 
 function NoteForm() {
     const navigate = useNavigate();
@@ -57,7 +56,7 @@ function NoteForm() {
             </label>
         </div>
         <button className="form-btn" type="submit">S U B M I T</button>
-        {errors ? (errors.map((error) => {return <p key={uuid()} className="errors">{error}</p>})) : null}
+        {errors ? (errors.map((error) => {return <p className="errors">{error}</p>})) : null}
       </form>
     </div>
   )
