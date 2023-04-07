@@ -16,9 +16,9 @@ class BottlesController < ApplicationController
     end
 
     def update
-        book = current_user.bottles.find_by(id: params[:id])
-        book.update!(book_params)
-        render json: book
+        bottle = current_user.bottles.find_by(id: params[:id])
+        bottle.update!(bottle_params)
+        render json: bottle
     end
     
     def destroy
