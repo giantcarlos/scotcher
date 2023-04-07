@@ -14,6 +14,7 @@ import DistilleriesForm from './Components/DistilleriesForm';
 import BottlePage from './Components/BottlePage';
 import BottleForm from './Components/BottleForm';
 import BottleEdit from './Components/BottleEdit';
+import NoteForm from './Components/NoteForm';
 import './App.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/bottles/:id" element={<BottlePage />} />
         <Route exact path="/bottles/:id/edit" element={<BottleEdit />} />
+        <Route exact path="/bottles/:id/notes/new" element={<NoteForm />} />
         <Route exact path="/bottles/new" element={<BottleForm />} />
         <Route exact path="/distilleries" element={<Distilleries />} />
         <Route exact path="/distilleries/new" element={<DistilleriesForm />} />

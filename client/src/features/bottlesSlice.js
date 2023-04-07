@@ -21,7 +21,10 @@ const bottlesSlice = createSlice({
         },
         bottleDeleted(state, action) {
             state.entities = state.entities.filter((b) => b.id !== action.payload);
-        }
+        },
+        noteAdded(state, action) {
+            state.entities = state.entities.filter((b) => b.id !== action.payload);
+    }
     },
     extraReducers: {
         [fetchBottles.pending](state) {
@@ -34,6 +37,6 @@ const bottlesSlice = createSlice({
     },
 })
 
-export const { bottleAdded, bottleUpdated, bottleDeleted } = bottlesSlice.actions;
+export const { bottleAdded, bottleUpdated, bottleDeleted, noteAdded } = bottlesSlice.actions;
 
 export default bottlesSlice.reducer;

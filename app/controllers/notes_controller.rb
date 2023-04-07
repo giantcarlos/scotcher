@@ -6,8 +6,7 @@ class NotesController < ApplicationController
     end
 
     def create
-        bottle = Bottle.find_by(:id params[:id])
-        note = bottle.notes.create!(note_params)
+        note = Note.create!(note_params)
         render json: note, status: :created
     end
 

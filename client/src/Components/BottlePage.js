@@ -32,10 +32,12 @@ function BottlePage() {
         <Link to={`/bottles/${id}/edit`}>
               <button className="bottle-btn">Edit Bottle</button>
         </Link>
-        <button className="bottle-btn" onClick={handleDelete}>Delete Bottle</button>
-        <button className="bottle-btn" onClick={handleDelete}>Add Note</button>
+            <button className="bottle-btn" onClick={handleDelete}>Delete Bottle</button>
+        <Link to={`/bottles/${id}/notes/new`}>
+            <button className="bottle-btn">Add Note</button>
+        </Link>
         {bottle?.notes.map(n =>(
-            <h3 className="comment" key="id">"{n.comment}"</h3>
+            <h3 className="comment" key="bottle.notes.id">"{n.comment}"</h3>
         ))}
     </div>
   )
