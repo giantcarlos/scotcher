@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchBottles } from '../features/bottlesSlice';
+import { fetchSessions } from '../features/sessionsSlice';
 
 function BottlePage() {
     const navigate = useNavigate();
@@ -12,10 +12,10 @@ function BottlePage() {
     const distillery = user.distilleries_user_bottles?.find(d => d.id===bottle?.distillery_id)
 
     const handleDelete = () => {
-        fetch(`/books/${id}`, 
+        fetch(`/bottles/${id}`, 
             { method: "DELETE" })
-        .then(() => dispatch(fetchBottles()))
-        .then(() => navigate(`/distilleries/${distillery.id}`));
+        .then(() => dispatch(fetchSessions()))
+        .then(() => navigate('/distilleries'));
     }
 
   return (
