@@ -36,7 +36,7 @@ function BottleEdit() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((data) => dispatch(fetchSessions(data)))
-        navigate(`/books/${id}`);
+        navigate(`/bottles/${id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
