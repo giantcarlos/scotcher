@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchSessions } from '../features/sessionsSlice';
+import { bottleAdded } from '../features/bottlesSlice';
 import Login from './Login';
 
 function BottleForm() {
@@ -30,7 +30,7 @@ function BottleForm() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => dispatch(fetchSessions(data)))
+        r.json().then((data) => dispatch(bottleAdded(data)))
         navigate('/distilleries');
       } else {
         r.json().then((err) => setErrors(err.errors));

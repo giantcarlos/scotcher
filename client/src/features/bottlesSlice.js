@@ -17,12 +17,10 @@ const bottlesSlice = createSlice({
             state.entities.push(action.payload);
         },
         bottleUpdated(state, action) {
-            const bottle = state.entities.find((bottle) => bottle.id === action.payload.id);
-            bottle = action.payload;
+            state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b)
         },
         bottleDeleted(state, action) {
-            const { id } = action.payload;
-            state.entities = state.entities.find((bottle) => bottle.id !== id);
+            state.entities = state.entities.filter((b) => b.id !== action.payload);
         }
     },
     extraReducers: {

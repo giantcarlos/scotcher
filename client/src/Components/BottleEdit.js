@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchSessions } from '../features/sessionsSlice';
+import { bottleUpdated } from '../features/bottlesSlice';
 
 function BottleEdit() {
-  const user = useSelector(state => state.sessions.entities)
+  const bottles = useSelector(state => state.bottles.entities)
   const dispatch = useDispatch();
   const { id } = useParams();
-  const bottle = user.bottles?.find(bottle => bottle.id===parseInt(id))
-  const distilleries = useSelector(state => state.distilleries.entities)
+  const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const navigate = useNavigate();
   const [ errors, setErrors ] = useState(null);
   const [ formData, setFormData ] = useState({
@@ -35,7 +34,7 @@ function BottleEdit() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => dispatch(fetchSessions(data)))
+        r.json().then((data) => dispatch(bottleUpdated(data)))
         navigate(`/bottles/${id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -61,21 +60,6 @@ function BottleEdit() {
               onChange={handleChange}
               autoFocus={true}
             />
-            </label>
-            <label htmlFor="distillery_id">Distillery: 
-            <select className="select"
-              type="textarea"
-              id="distillery_id"
-              value={formData.distillery_id}
-              onChange={handleChange}
-            >
-              <option value=""></option>
-              {distilleries.map(d => (
-                <option key={d.id} value={d.id}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
             </label>
             <label htmlFor="origin">Origin: 
             <select className="select"
