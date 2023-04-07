@@ -17,7 +17,7 @@ const sessionsSlice = createSlice({
             state.entities = action.payload;
         },
         sessionsDeleted(state) {
-            state.entities = {};
+            state.entities = null;
         }
     },
     extraReducers: {
