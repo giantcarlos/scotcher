@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchBottles } from '../features/bottlesSlice';
+import { fetchSessions } from '../features/sessionsSlice';
 import Login from './Login';
 
 function BottleForm() {
@@ -30,7 +30,7 @@ function BottleForm() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => dispatch(fetchBottles(data)))
+        r.json().then((data) => dispatch(fetchSessions(data)))
         navigate('/distilleries');
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -123,7 +123,7 @@ function BottleForm() {
             </label>
             <label htmlFor="price">Price: 
             <input 
-              type="textarea"
+              type="number"
               id="price"
               value={formData.price}
               onChange={handleChange}
@@ -131,8 +131,8 @@ function BottleForm() {
             </label>
             <label htmlFor="rating">Your personal rating: 
             <input 
-              type="textarea"
-              id="writer"
+              type="number"
+              id="rating"
               value={formData.rating}
               onChange={handleChange}
             />

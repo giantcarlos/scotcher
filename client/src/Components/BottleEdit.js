@@ -126,7 +126,7 @@ function BottleEdit() {
             </label>
             <label htmlFor="price">Price: 
             <input 
-              type="textarea"
+              type="number"
               id="price"
               value={formData.price}
               onChange={handleChange}
@@ -134,8 +134,8 @@ function BottleEdit() {
             </label>
             <label htmlFor="rating">Your personal rating: 
             <input 
-              type="textarea"
-              id="writer"
+              type="number"
+              id="rating"
               value={formData.rating}
               onChange={handleChange}
             />
