@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { bottleUpdated } from '../features/bottlesSlice';
 
 function BottleEdit() {
-  const bottles = useSelector(state => state.bottles.entities)
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const navigate = useNavigate();
+  const { id } = useParams();
+  const bottles = useSelector(state => state.bottles.entities)
+  const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const [ errors, setErrors ] = useState(null);
   const [ formData, setFormData ] = useState({
     distillery_id: bottle.distillery_id,
