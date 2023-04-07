@@ -31,7 +31,8 @@ function App() {
 
 
   return (
-    <div className="background" style={{backgroundImage: "url(/scotchbg.png)"}}>
+    // <div className="background" style={{backgroundImage: "url(/scotchbg.png)"}}>
+     <div> 
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
