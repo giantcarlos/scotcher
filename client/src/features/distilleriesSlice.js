@@ -13,9 +13,6 @@ const distilleriesSlice = createSlice({
         status: "idle",
     },
     reducers: {
-        distilleryAdded(state, action) {
-            state.entities.push(action.payload);
-        }
     },
     extraReducers: {
         [fetchDistilleries.pending](state) {

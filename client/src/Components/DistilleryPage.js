@@ -6,8 +6,8 @@ import BottleCard from './BottleCard';
 
 function DistilleryPage() {
     const { id } = useParams();
-    const user = useSelector(state => state.sessions.entities)
-    const distillery = user.distilleries_user_bottles?.find(d => d.id===parseInt(id))
+    const distilleries = useSelector(state => state.distilleries.entities)
+    const distillery = distilleries?.find(d => d.id===parseInt(id))
 
     const bottleCards = () => distillery?.bottles.map((bottle, key) => <BottleCard bottle={bottle} key={key}/>)
 

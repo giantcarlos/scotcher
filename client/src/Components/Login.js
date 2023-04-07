@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { sessionsAdded } from '../features/sessionsSlice';
 import { fetchDistilleries } from '../features/distilleriesSlice';
+import { fetchBottles } from '../features/bottlesSlice';
+import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
 
 function Login() {
   const navigate = useNavigate();
@@ -23,7 +25,9 @@ function Login() {
       if (r.ok) {
         r.json().then((data) => {
           dispatch(sessionsAdded(data))
+          dispatch(fetchBottles())
           dispatch(fetchDistilleries())
+          dispatch(fetchAllDistilleries())
         })
         navigate('/');
       } else {

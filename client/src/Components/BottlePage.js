@@ -7,7 +7,6 @@ function BottlePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const user = useSelector(state => state.sessions.entities)
     const bottles = useSelector(state => state.bottles.entities)
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
 

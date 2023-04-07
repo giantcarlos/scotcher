@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { distilleryAdded } from '../features/distilleriesSlice';
+import { distilleryAdded } from '../features/allDistilleriesSlice';
 
 function DistilleriesForm() {
     const navigate = useNavigate();

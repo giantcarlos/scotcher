@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { sessionsAdded } from '../features/sessionsSlice';
+import { fetchDistilleries } from '../features/distilleriesSlice';
+import { fetchBottles } from '../features/bottlesSlice';
+import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -27,6 +30,9 @@ function SignUp() {
         if (r.ok) {
           r.json().then((user) => {
             dispatch(sessionsAdded(user))
+            dispatch(fetchBottles())
+            dispatch(fetchDistilleries())
+            dispatch(fetchAllDistilleries())
           })
             navigate('/');
         } else {
