@@ -1,4 +1,3 @@
 class NoteSerializer < ActiveModel::Serializer
-  attributes :id, :comment
-  has_one :bottle
+  attributes :id, :comment, :bottle_id
 end
