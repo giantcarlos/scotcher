@@ -12,7 +12,7 @@ const sessionsSlice = createSlice({
         entities: {}, 
         status: "idle",
     },
-    reducer: {
+    reducers: {
         sessionsAdded(state, action) {
             state.entities = action.payload;
         },

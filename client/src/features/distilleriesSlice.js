@@ -12,7 +12,7 @@ const distilleriesSlice = createSlice({
         entities: [], 
         status: "idle",
     },
-    reducer: {
+    reducers: {
         distilleryAdded(state, action) {
             state.entities.push(action.payload);
         }

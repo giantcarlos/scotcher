@@ -9,7 +9,6 @@ function BottlePage() {
     const { id } = useParams();
     const user = useSelector(state => state.sessions.entities)
     const bottle = user.bottles?.find(bottle => bottle.id===parseInt(id))
-    const distillery = user.distilleries_user_bottles?.find(d => d.id===bottle?.distillery_id)
 
     const handleDelete = () => {
         fetch(`/bottles/${id}`, 
