@@ -5,6 +5,7 @@ import { fetchSessions } from './features/sessionsSlice';
 import { fetchDistilleries } from './features/distilleriesSlice';
 import { fetchBottles } from './features/bottlesSlice';
 import { fetchAllDistilleries } from './features/allDistilleriesSlice';
+import { fetchNotes } from './features/notesSlice';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import NavBar from './Components/NavBar';
@@ -25,6 +26,7 @@ function App() {
       .then(dispatch(fetchBottles()))
       .then(dispatch(fetchDistilleries()))
       .then(dispatch(fetchAllDistilleries()))
+      .then(dispatch(fetchNotes()))
   });
 
 
