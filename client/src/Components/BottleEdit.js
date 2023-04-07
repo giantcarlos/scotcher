@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchBottles } from '../features/bottlesSlice';
+import { fetchSessions } from '../features/sessionsSlice';
 
 function BottleEdit() {
   const user = useSelector(state => state.sessions.entities)
@@ -35,7 +35,7 @@ function BottleEdit() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => dispatch(fetchBottles(data)))
+        r.json().then((data) => dispatch(fetchSessions(data)))
         navigate(`/books/${id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -124,7 +124,7 @@ function BottleEdit() {
               <option value="20">20</option>
             </select>
             </label>
-            <label htmlFor="rating">Price: 
+            <label htmlFor="price">Price: 
             <input 
               type="textarea"
               id="price"

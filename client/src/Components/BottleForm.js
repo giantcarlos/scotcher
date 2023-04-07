@@ -121,7 +121,7 @@ function BottleForm() {
               <option value="20">20</option>
             </select>
             </label>
-            <label htmlFor="rating">Price: 
+            <label htmlFor="price">Price: 
             <input 
               type="textarea"
               id="price"

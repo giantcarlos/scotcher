@@ -16,13 +16,13 @@ class BottlesController < ApplicationController
     end
 
     def update
-        book = current_user.books.find_by(id: params[:id])
+        book = current_user.bottles.find_by(id: params[:id])
         book.update!(book_params)
         render json: book
     end
     
     def destroy
-        bottle = @current_user.bottles.find_by(id: params[:id])
+        bottle = current_user.bottles.find_by(id: params[:id])
         bottle.destroy
         head :no_content
     end
