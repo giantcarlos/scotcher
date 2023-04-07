@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchSessions } from '../features/sessionsSlice';
+import { sessionsAdded } from '../features/sessionsSlice';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function SignUp() {
     }).then((r) => {
         if (r.ok) {
           r.json().then((user) => {
-            dispatch(fetchSessions(user))
+            dispatch(sessionsAdded(user))
           })
             navigate('/');
         } else {
