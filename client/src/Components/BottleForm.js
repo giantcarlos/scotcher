@@ -9,9 +9,9 @@ function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
   const distilleries = useSelector(state => state.distilleries.entities)
   const allDistilleries = useSelector(state => state.allDistilleries.entities)
+  const errors = useSelector(state => state.bottles.errors)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [ errors, setErrors ] = useState(null);
   const [ formData, setFormData ] = useState({
     distillery_id: "",
     name: "",
