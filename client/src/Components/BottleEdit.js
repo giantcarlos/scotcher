@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { bottleUpdated } from '../features/bottlesSlice';
+import { patchBottle } from '../features/bottlesSlice';
 
 function BottleEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const errors = useSelector(state => state.bottles.errors)
   const bottles = useSelector(state => state.bottles.entities)
   const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
-  const [ errors, setErrors ] = useState(null);
   const [ formData, setFormData ] = useState({
     distillery_id: bottle.distillery_id,
     name: "",
@@ -26,20 +26,9 @@ function BottleEdit() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/bottles/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => dispatch(bottleUpdated(data)))
-        navigate(`/bottles/${id}`);
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    })}
+    dispatch(patchBottle({formData, id}))
+    navigate(`/bottles/${id}`);
+    } 
 
   const handleChange = (e) => {
     setFormData({

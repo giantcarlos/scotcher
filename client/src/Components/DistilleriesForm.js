@@ -1,30 +1,18 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { allDistilleryAdded } from '../features/allDistilleriesSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { postAllDistillery } from '../features/allDistilleriesSlice';
 
 function DistilleriesForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const errors = useSelector(state => state.bottles.errors)
     const [ name, setName ] = useState("");
-    const [ errors, setErrors ] = useState(null);
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/distilleries", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({name}),
-        }).then((r) => {
-          if (r.ok) {
-            r.json().then((data) => dispatch(allDistilleryAdded(data)))
-            navigate('/bottles/new');
-          } else {
-            r.json().then((err) => setErrors(err.errors));
-          }
-        })
+        dispatch(postAllDistillery(name))
+        navigate('/bottles/new');
       }
 
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { bottleDeleted } from '../features/bottlesSlice';
 import { distilleryDeleted } from '../features/distilleriesSlice';
+import { deleteBottle } from '../features/bottlesSlice';
 
 function BottlePage() {
     const navigate = useNavigate();
@@ -15,18 +15,13 @@ function BottlePage() {
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id));
 
     const handleDelete = () => {
-        fetch(`/bottles/${id}`, { method: "DELETE" })
-        removeBottle(bottle)
-        navigate('/distilleries')
-    }
-
-    const removeBottle = (bottle) => {
-        dispatch(bottleDeleted(bottle.id))
+        dispatch(deleteBottle(id))
         const distillery = allDistilleries.find(d => d.id===bottle.distillery_id)
         const distilleryExists = bottles.findIndex(b => b.distillery_id===bottle.distillery_id) > -1;
         if (distilleryExists) {
           dispatch(distilleryDeleted(distillery))
         }
+        navigate('/distilleries')
     }
 
   return (

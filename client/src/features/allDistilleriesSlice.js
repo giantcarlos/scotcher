@@ -6,6 +6,16 @@ export const fetchAllDistilleries = createAsyncThunk("allDistilleries/fetchAllDi
         .then((data) => data);
 })
 
+export const postAllDistillery = createAsyncThunk("distilleries/postDistillery", (name) => {
+    return fetch("/distilleries", {
+        method: "POST",
+        headers: {"Content-Type": "application/json",},
+        body: JSON.stringify({name}),
+    })
+        .then((response) => response.json())
+        .then((data) => allDistilleryAdded(data));
+})
+
 const allDistilleriesSlice = createSlice({
     name: "allDistilleries",
     initialState: {
@@ -24,6 +34,13 @@ const allDistilleriesSlice = createSlice({
         [fetchAllDistilleries.fulfilled](state, action) {
             state.entities = action.payload;
             state.status = "idle"
+        },
+        [postAllDistillery.pending](state) {
+            state.status = "loading";
+        },
+        [postAllDistillery.fulfilled](state, action) {
+            state.entities = action.payload;
+            state.status = "idle";
         },
     },
 })
