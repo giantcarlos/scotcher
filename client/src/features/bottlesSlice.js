@@ -6,6 +6,15 @@ export const fetchBottles = createAsyncThunk("bottles/fetchBottles", () => {
         .then((data) => data);
 })
 
+export const postBottle = createAsyncThunk("bottles/postBottle", (formData) => {
+    return fetch("/bottles", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(formData)})
+        .then((response) => response.json())
+        .then((data) => bottleAdded(data))
+    })
+
 const bottlesSlice = createSlice({
     name: "bottles",
     initialState: {

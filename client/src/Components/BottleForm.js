@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { bottleAdded } from '../features/bottlesSlice';
+import { postBottle } from '../features/bottlesSlice';
+import { distilleryAdded } from "../features/distilleriesSlice";
 import Login from './Login';
-import { distilleryAdded } from '../features/distilleriesSlice';
 
 function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
@@ -22,31 +22,14 @@ function BottleForm() {
     image_url: ""
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    fetch("/bottles", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => addBottle(data))
+  function handleSubmit() {
+        dispatch(postBottle(formData))
+        const distillery = allDistilleries.find(d => d.id===formData.distillery_id)
+        const distilleryExists = distilleries.findIndex(d => d.id ===formData.distillery_id) > -1;
+            if (!distilleryExists) {
+        dispatch(distilleryAdded(distillery))}
         navigate('/distilleries');
-      } else {
-        r.json().then((err) => setErrors(err.errors));
       }
-    })}
-
-    const addBottle = (data) => {
-      dispatch(bottleAdded(data))
-      const distillery = allDistilleries.find(d => d.id===data.distillery_id)
-      const distilleryExists = distilleries.findIndex(d => d.id ===data.distillery_id) > -1;
-        if (!distilleryExists) {
-          dispatch(distilleryAdded(distillery))
-        }
-    }
 
   const handleChange = (e) => {
     setFormData({
@@ -79,7 +62,7 @@ function BottleForm() {
               onChange={handleChange}
             >
               <option value=""></option>
-              {allDistilleries.map(d => (
+              {allDistilleries?.map(d => (
                 <option key={d?.id} value={d?.id}>
                   {d?.name}
                 </option>
