@@ -16,6 +16,9 @@ const distilleriesSlice = createSlice({
         distilleryAdded(state, action) {
             state.entities.push(action.payload);
         },
+        distilleryDeleted(state, action) {
+            state.entities = state.entities.filter((d) => d.id !== action.payload);
+        },
     },
     extraReducers: (builder) => (
         builder
