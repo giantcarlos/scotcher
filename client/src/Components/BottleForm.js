@@ -29,7 +29,7 @@ function BottleForm() {
             if (!distilleryExists) {
         (dispatch(distilleryAdded(distillery)));
          }
-        navigate('/distilleries')
+        if (!errors) {navigate('/distilleries')}
 }
 
   const handleChange = (e) => {
