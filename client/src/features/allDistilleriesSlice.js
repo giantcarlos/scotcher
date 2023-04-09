@@ -27,22 +27,16 @@ const allDistilleriesSlice = createSlice({
             state.entities.push(action.payload);
         }
     },
-    extraReducers: {
-        [fetchAllDistilleries.pending](state) {
+    extraReducers: (builder) => (
+        builder
+        .addCase(fetchAllDistilleries.pending, (state) => {
             state.status = "loading";
-        },
-        [fetchAllDistilleries.fulfilled](state, action) {
-            state.entities = action.payload;
-            state.status = "idle"
-        },
-        [postAllDistillery.pending](state) {
-            state.status = "loading";
-        },
-        [postAllDistillery.fulfilled](state, action) {
+          })
+        .addCase(fetchAllDistilleries.fulfilled, (state, action) => {
             state.entities = action.payload;
             state.status = "idle";
-        },
-    },
+          })
+    )
 })
 
 export const { allDistilleryAdded } = allDistilleriesSlice.actions;

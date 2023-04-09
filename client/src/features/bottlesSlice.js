@@ -47,36 +47,16 @@ const bottlesSlice = createSlice({
             state.entities = state.entities.filter((b) => b.id !== action.payload);
         },
     },
-    extraReducers: {
-        [fetchBottles.pending](state) {
+    extraReducers: (builder) => (
+        builder
+        .addCase(fetchBottles.pending, (state) => {
             state.status = "loading";
-        },
-        [fetchBottles.fulfilled](state, action) {
+          })
+        .addCase(fetchBottles.fulfilled, (state, action) => {
             state.entities = action.payload;
             state.status = "idle";
-        },
-        [postBottle.pending](state) {
-            state.status = "loading";
-        },
-        [postBottle.fulfilled](state, action) {
-            state.entities = action.payload;
-            state.status = "idle";
-        },
-        [patchBottle.pending](state) {
-            state.status = "loading";
-        },
-        [patchBottle.fulfilled](state, action) {
-            state.entities = action.payload;
-            state.status = "idle";
-        },
-        [deleteBottle.pending](state) {
-            state.status = "loading";
-        },
-        [deleteBottle.fulfilled](state, action) {
-            state.entities = action.payload;
-            state.status = "idle";
-        },
-    },
+          })
+    )
 })
 
 export const { bottleAdded, bottleUpdated, bottleDeleted } = bottlesSlice.actions;

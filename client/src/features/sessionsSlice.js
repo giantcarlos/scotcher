@@ -20,15 +20,16 @@ const sessionsSlice = createSlice({
             state.entities = null;
         },
     },
-    extraReducers: {
-        [fetchSessions.pending](state) {
+    extraReducers: (builder) => (
+        builder
+        .addCase(fetchSessions.pending, (state) => {
             state.status = "loading";
-        },
-        [fetchSessions.fulfilled](state, action) {
+          })
+        .addCase(fetchSessions.fulfilled, (state, action) => {
             state.entities = action.payload;
-            state.status = "idle"
-        },
-    },
+            state.status = "idle";
+          })
+    )
 });
 
 export const { sessionsAdded, sessionsDeleted, sessionsBottleDeleted } = sessionsSlice.actions;

@@ -17,15 +17,16 @@ const distilleriesSlice = createSlice({
             state.entities.push(action.payload);
         },
     },
-    extraReducers: {
-        [fetchDistilleries.pending](state) {
+    extraReducers: (builder) => (
+        builder
+        .addCase(fetchDistilleries.pending, (state) => {
             state.status = "loading";
-        },
-        [fetchDistilleries.fulfilled](state, action) {
+          })
+        .addCase(fetchDistilleries.fulfilled, (state, action) => {
             state.entities = action.payload;
             state.status = "idle";
-        },
-    },
+          })
+    )
 })
 
 export const { distilleryAdded, distilleryDeleted } = distilleriesSlice.actions;

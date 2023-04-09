@@ -17,15 +17,16 @@ const notesSlice = createSlice({
             state.entities.push(action.payload);
         }
     },
-    extraReducers: {
-        [fetchNotes.pending](state) {
+    extraReducers: (builder) => (
+        builder
+        .addCase(fetchNotes.pending, (state) => {
             state.status = "loading";
-        },
-        [fetchNotes.fulfilled](state, action) {
+          })
+        .addCase(fetchNotes.fulfilled, (state, action) => {
             state.entities = action.payload;
-            state.status = "idle"
-        },
-    },
+            state.status = "idle";
+          })
+    )
 })
 
 export const { noteAdded } = notesSlice.actions;
