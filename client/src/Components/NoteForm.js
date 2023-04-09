@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { noteAdded } from '../features/notesSlice';
+import { postNote } from '../features/notesSlice';
 
 function NoteForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
+    const errors = useSelector(state => state.bottles.errors)
     const bottles = useSelector(state => state.bottles.entities)
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
-    const [ errors, setErrors ] = useState(null);
     const [ formData, setFormData ] = useState({
         bottle_id: id,
         comment: "",
@@ -17,20 +17,8 @@ function NoteForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/notes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }).then((r) => {
-          if (r.ok) {
-            r.json().then((data) => dispatch(noteAdded(data)))
-            navigate(`/bottles/${id}`);
-          } else {
-            r.json().then((err) => setErrors(err.errors));
-          }
-        })
+        dispatch(postNote(formData))
+        if (!errors) {navigate(`/bottles/${id}`)}
       }
 
       const handleChange = (e) => {

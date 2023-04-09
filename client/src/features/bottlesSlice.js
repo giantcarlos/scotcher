@@ -56,6 +56,27 @@ const bottlesSlice = createSlice({
             state.entities = action.payload;
             state.status = "idle";
           })
+        .addCase(postBottle.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(postBottle.fulfilled, (state, action) => {
+            state.entities = action.payload;
+            state.status = "idle";
+          })
+        .addCase(patchBottle.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(patchBottle.fulfilled, (state, action) => {
+            state.entities = action.payload;
+            state.status = "idle";
+          })
+        .addCase(deleteBottle.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(deleteBottle.fulfilled, (state, action) => {
+            state.entities = action.payload;
+            state.status = "idle";
+          })
     )
 })
 

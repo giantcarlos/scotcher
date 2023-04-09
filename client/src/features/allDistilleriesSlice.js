@@ -36,6 +36,13 @@ const allDistilleriesSlice = createSlice({
             state.entities = action.payload;
             state.status = "idle";
           })
+        .addCase(postAllDistillery.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(postAllDistillery.fulfilled, (state, action) => {
+            state.entities = action.payload;
+            state.status = "idle";
+          })
     )
 })
 
