@@ -26,14 +26,13 @@ export const patchBottle = createAsyncThunk("bottles/patchBottle", ({formData, i
 
 export const deleteBottle = createAsyncThunk("bottles/deleteBottle", (id) => {
     return fetch(`/bottles/${id}`, { method: "DELETE" })
-        .then((response) => response.json())
         .then((data) => bottleDeleted(data))
 })
 
 const bottlesSlice = createSlice({
     name: "bottles",
     initialState: {
-        entities: [], 
+        entities: [],
         status: "idle",
     },
     reducers: {

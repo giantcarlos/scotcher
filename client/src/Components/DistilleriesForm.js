@@ -6,13 +6,12 @@ import { postAllDistillery } from '../features/allDistilleriesSlice';
 function DistilleriesForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const errors = useSelector(state => state.bottles.errors)
+    const errors = useSelector(state => state.allDistilleries.entities.payload?.errors)
     const [ name, setName ] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(postAllDistillery(name))
-        navigate('/bottles/new');
       }
 
   return (

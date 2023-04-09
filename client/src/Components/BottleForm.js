@@ -9,7 +9,7 @@ function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
   const distilleries = useSelector(state => state.distilleries.entities)
   const allDistilleries = useSelector(state => state.allDistilleries.entities)
-  const errors = useSelector(state => state.bottles.errors)
+  const errors = useSelector(state => state.bottles.entities.payload?.errors)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [ formData, setFormData ] = useState({
@@ -22,12 +22,12 @@ function BottleForm() {
     image_url: ""
   });
 
-  function handleSubmit() {
-        dispatch(postBottle(formData));
-        const distillery = allDistilleries.find(d => d.id===formData.distillery_id)
-        const distilleryExists = distilleries.findIndex(d => d.id ===formData.distillery_id) > -1;
+  function handleSubmit(e) {
+      e.preventDefault();
+      dispatch(postBottle(formData));
+      const distillery = allDistilleries.find(d => d.id===formData.distillery_id)
+      const distilleryExists = distilleries.findIndex(d => d?.id ===formData.distillery_id) > -1;
         if (!distilleryExists) {(dispatch(distilleryAdded(distillery)))}
-        if (!errors) {navigate('/distilleries')}
   }
 
   const handleChange = (e) => {

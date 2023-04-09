@@ -8,11 +8,11 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 
 ReactDOM.render(
-  <Router>
-    <Provider store={store}>
+  <Provider store={store}>
+    <Router>
       <App />
-    </Provider>
-  </Router>,
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

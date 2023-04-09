@@ -7,7 +7,7 @@ function NoteForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const errors = useSelector(state => state.bottles.errors)
+    const errors = useSelector(state => state.notes.entities.payload?.errors)
     const bottles = useSelector(state => state.bottles.entities)
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
     const [ formData, setFormData ] = useState({
@@ -18,7 +18,6 @@ function NoteForm() {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(postNote(formData))
-        if (!errors) {navigate(`/bottles/${id}`)}
       }
 
       const handleChange = (e) => {

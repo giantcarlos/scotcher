@@ -7,7 +7,7 @@ function BottleEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const errors = useSelector(state => state.bottles.errors)
+  const errors = useSelector(state => state.bottles.entities.payload?.errors)
   const bottles = useSelector(state => state.bottles.entities)
   const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const [ formData, setFormData ] = useState({
@@ -27,7 +27,7 @@ function BottleEdit() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(patchBottle({formData, id}))
-    navigate(`/bottles/${id}`);
+    console.log(errors)
     } 
 
   const handleChange = (e) => {

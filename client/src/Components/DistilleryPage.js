@@ -8,7 +8,7 @@ function DistilleryPage() {
     const { id } = useParams();
     const bottles = useSelector(state => state.bottles.entities)
     const distilleries = useSelector(state => state.distilleries.entities)
-    const distilleryBottles = bottles.filter(b => b.distillery_id===parseInt(id))
+    const distilleryBottles = bottles?.filter(b => b.distillery_id===parseInt(id))
     const distillery = distilleries?.find(d => d.id===parseInt(id))
 
     const bottleCards = () => distilleryBottles?.map((bottle, key) => <BottleCard bottle={bottle} key={key}/>)
