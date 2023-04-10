@@ -14,10 +14,10 @@ const distilleriesSlice = createSlice({
     },
     reducers: {
         distilleryAdded(state, action) {
-            state.entities.push(action.payload);
+            state.entities.push(action.payload.distillery);
         },
         distilleryDeleted(state, action) {
-            return state.entities.filter((d) => d.id !== action.payload);
+            state.entities.filter((d) => d.id !== action.payload);
         },
     },
     extraReducers: (builder) => (

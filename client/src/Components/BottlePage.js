@@ -11,7 +11,7 @@ function BottlePage() {
     const bottles = useSelector(state => state.bottles.entities);
     const notes = useSelector(state => state.notes.entities);
     const allDistilleries = useSelector(state => state.allDistilleries.entities)
-    const bottleNotes = notes?.filter(note => note.bottle_id===parseInt(id))
+
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id));
 
     const handleDelete = () => {
@@ -44,7 +44,7 @@ function BottlePage() {
         <Link to={`/bottles/${id}/notes/new`}>
             <button className="bottle-btn">Add Note</button>
         </Link>
-        {bottleNotes?.map(n =>(
+        {notes?.filter(note => note.bottle_id===parseInt(id)).map(n =>(
             <h3 className="comment" key={n.id}>"{n.comment}"</h3>
         ))}
     </div>

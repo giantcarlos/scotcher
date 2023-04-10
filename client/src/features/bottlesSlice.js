@@ -6,27 +6,29 @@ export const fetchBottles = createAsyncThunk("bottles/fetchBottles", () => {
         .then((data) => data);
 })
 
-export const postBottle = createAsyncThunk("bottles/postBottle", (formData) => {
+export const postBottle = createAsyncThunk("bottles/postBottle", 
+    async (formData) => {
     return fetch("/bottles", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData)})
         .then((response) => response.json())
-        .then((data) => bottleAdded(data))
+        .then((data) => (data))
 })
 
-export const patchBottle = createAsyncThunk("bottles/patchBottle", ({formData, id}) => {
+export const patchBottle = createAsyncThunk("bottles/patchBottle", 
+    async ({formData, id}) => {
     return fetch(`/bottles/${id}`, {
         method: "PATCH",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData)})
         .then((response) => response.json())
-        .then((data) => bottleUpdated(data))
+        .then((data) => (data))
 })
 
-export const deleteBottle = createAsyncThunk("bottles/deleteBottle", (id) => {
+export const deleteBottle = createAsyncThunk("bottles/deleteBottle", 
+    async (id) => {
     return fetch(`/bottles/${id}`, { method: "DELETE" })
-        .then((data) => bottleDeleted(data))
 })
 
 const bottlesSlice = createSlice({
@@ -36,14 +38,8 @@ const bottlesSlice = createSlice({
         status: "idle",
     },
     reducers: {
-        bottleAdded(state, action) {
-            state.entities.push(action.payload);
-        },
         bottleUpdated(state, action) {
             state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
-        },
-        bottleDeleted(state, action) {
-            state.entities = state.entities.filter((b) => b.id !== action.payload);
         },
     },
     extraReducers: (builder) => (
@@ -59,22 +55,22 @@ const bottlesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postBottle.fulfilled, (state, action) => {
-            state.entities = action.payload;
             state.status = "idle";
+            state.entities.push(action.payload);
           })
         .addCase(patchBottle.pending, (state) => {
             state.status = "loading";
           })
         .addCase(patchBottle.fulfilled, (state, action) => {
-            state.entities = action.payload;
+            state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
             state.status = "idle";
           })
         .addCase(deleteBottle.pending, (state) => {
             state.status = "loading";
           })
         .addCase(deleteBottle.fulfilled, (state, action) => {
-            state.entities = action.payload;
             state.status = "idle";
+            state.entities = state.entities.filter((b) => b.id !== action.payload.id);
           })
     )
 })

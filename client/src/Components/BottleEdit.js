@@ -11,7 +11,7 @@ function BottleEdit() {
   const bottles = useSelector(state => state.bottles.entities)
   const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const [ formData, setFormData ] = useState({
-    distillery_id: bottle.distillery_id,
+    distillery_id: bottles?.find(bottle => bottle.id===parseInt(id))?.distillery_id,
     name: "",
     origin: "",
     year: "",
@@ -27,7 +27,7 @@ function BottleEdit() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(patchBottle({formData, id}))
-    console.log(errors)
+    console.log(formData)
     } 
 
   const handleChange = (e) => {
@@ -39,13 +39,13 @@ function BottleEdit() {
   return (
     <div>
       <form className="login-form" onSubmit={handleSubmit}>
-        <h3>Edit {bottle.name}</h3>
+        <h3>Edit {bottle?.name}</h3>
         <div className="form-text">
           <label htmlFor="name">Name: 
             <input 
               type="textarea"
               id="name"
-              value={formData.name}
+              value={formData?.name}
               onChange={handleChange}
               autoFocus={true}
             />
@@ -54,7 +54,7 @@ function BottleEdit() {
             <select className="select"
               type="textarea"
               id="origin"
-              value={formData.origin}
+              value={formData?.origin}
               onChange={handleChange}
             >
               <option value=""></option>
@@ -73,7 +73,7 @@ function BottleEdit() {
             <select className="select"
               type="textarea"
               id="year"
-              value={formData.year}
+              value={formData?.year}
               onChange={handleChange}
             >
               <option value=""></option>
@@ -102,7 +102,7 @@ function BottleEdit() {
             <input 
               type="number"
               id="price"
-              value={formData.price}
+              value={formData?.price}
               onChange={handleChange}
             />
             </label>
@@ -110,7 +110,7 @@ function BottleEdit() {
             <input 
               type="number"
               id="rating"
-              value={formData.rating}
+              value={formData?.rating}
               onChange={handleChange}
             />
             </label>
@@ -118,7 +118,7 @@ function BottleEdit() {
             <input 
               type="textarea"
               id="image_url"
-              value={formData.image_url}
+              value={formData?.image_url}
               onChange={handleChange}
             />
             </label>

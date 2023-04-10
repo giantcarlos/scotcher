@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
 
 export const fetchNotes = createAsyncThunk("notes/fetchNotes", () => {
     return fetch("/notes")
@@ -8,14 +7,12 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", () => {
 })
 
 export const postNote = createAsyncThunk("notes/postNotes", (formData) => {
-    // const navigate = useNavigate()
     return fetch("/notes", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData)})
         .then((response) => response.json())
         .then((data) => noteAdded(data))
-        // .then(navigate(`/bottles/${formData.bottle_id}`))
 })
 
 const notesSlice = createSlice({
