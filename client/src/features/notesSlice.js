@@ -6,7 +6,7 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", () => {
         .then((data) => data);
 })
 
-export const postNote = createAsyncThunk("notes/postNotes", (formData) => {
+export const postNote = createAsyncThunk("notes/postNotes", async (formData) => {
     return fetch("/notes", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -19,9 +19,13 @@ const notesSlice = createSlice({
     name: "notes",
     initialState: {
         entities: [], 
+        errors: [],
         status: "idle",
     },
     reducers: {
+        // noteAdded(state, action) {
+        //     state.entities.push(action.payload);
+        // }
     },
     extraReducers: (builder) => (
         builder
@@ -36,8 +40,14 @@ const notesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postNote.fulfilled, (state, action) => {
-            state.entities.push(action.payload);
-            state.status = "idle";
+            if (action.payload.errors) {
+                state.errors = action.payload.errors
+                state.status = "idle"
+            } else {
+                state.entities.push(action.payload);
+                state.status = "idle";
+                state.errors = []
+            }
           })  
     )
 })

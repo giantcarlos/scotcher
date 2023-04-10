@@ -13,19 +13,17 @@ export const postAllDistillery = createAsyncThunk("distilleries/postDistillery",
         body: JSON.stringify({name}),
     })
         .then((response) => response.json())
-        .then((data) => allDistilleryAdded(data));
+        .then((data) => (data));
 })
 
 const allDistilleriesSlice = createSlice({
     name: "allDistilleries",
     initialState: {
         entities: [], 
+        errors: [],
         status: "idle",
     },
     reducers: {
-        allDistilleryAdded(state, action) {
-            state.entities.push(action.payload);
-        }
     },
     extraReducers: (builder) => (
         builder
@@ -40,8 +38,14 @@ const allDistilleriesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postAllDistillery.fulfilled, (state, action) => {
-            state.entities = action.payload;
-            state.status = "idle";
+            if (action.payload.errors) {
+                state.errors = action.payload.errors
+                state.status = "idle"
+            } else {
+                state.entities.push(action.payload);
+                state.status = "idle";
+                state.errors = []
+            }
           })
     )
 })

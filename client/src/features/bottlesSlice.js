@@ -35,12 +35,10 @@ const bottlesSlice = createSlice({
     name: "bottles",
     initialState: {
         entities: [],
+        errors: [],
         status: "idle",
     },
     reducers: {
-        bottleUpdated(state, action) {
-            state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
-        },
     },
     extraReducers: (builder) => (
         builder
@@ -55,22 +53,34 @@ const bottlesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postBottle.fulfilled, (state, action) => {
-            state.status = "idle";
-            state.entities.push(action.payload);
+            if (action.payload.errors) {
+                state.errors = action.payload.errors
+                state.status = "idle"
+            } else {
+                state.entities.push(action.payload);
+                state.status = "idle";
+                state.errors = []
+            }
           })
         .addCase(patchBottle.pending, (state) => {
             state.status = "loading";
           })
         .addCase(patchBottle.fulfilled, (state, action) => {
-            state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
-            state.status = "idle";
+            if (action.payload.errors) {
+                state.errors = action.payload.errors
+                state.status = "idle"
+            } else {
+                state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
+                state.status = "idle";
+                state.errors = []
+            }
           })
         .addCase(deleteBottle.pending, (state) => {
             state.status = "loading";
           })
         .addCase(deleteBottle.fulfilled, (state, action) => {
             state.status = "idle";
-            state.entities = state.entities.filter((b) => b.id !== action.payload.id);
+            state.entities = state.entities.filter((b) => b.id !== action.payload);
           })
     )
 })
