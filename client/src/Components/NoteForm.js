@@ -18,6 +18,7 @@ function NoteForm() {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(postNote(formData))
+        if (!errors) {navigate(`/bottles/${id}`)}
       }
 
       const handleChange = (e) => {

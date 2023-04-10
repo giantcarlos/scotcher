@@ -12,7 +12,7 @@ export const postNote = createAsyncThunk("notes/postNotes", (formData) => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData)})
         .then((response) => response.json())
-        .then((data) => noteAdded(data))
+        .then((data) => (data))
 })
 
 const notesSlice = createSlice({
@@ -22,9 +22,6 @@ const notesSlice = createSlice({
         status: "idle",
     },
     reducers: {
-        noteAdded(state, action) {
-            state.entities.push(action.payload);
-        }
     },
     extraReducers: (builder) => (
         builder
@@ -39,7 +36,7 @@ const notesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postNote.fulfilled, (state, action) => {
-            state.entities = action.payload;
+            state.entities.push(action.payload);
             state.status = "idle";
           })  
     )
