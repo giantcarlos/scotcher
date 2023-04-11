@@ -26,6 +26,7 @@ export const patchBottle = createAsyncThunk("bottles/patchBottle", ({formData, i
 
 export const deleteBottle = createAsyncThunk("bottles/deleteBottle", (id) => {
     return fetch(`/bottles/${id}`, { method: "DELETE" })
+        .then((response) => (response.data))
 })
 
 const bottlesSlice = createSlice({
@@ -36,9 +37,6 @@ const bottlesSlice = createSlice({
         status: "idle",
     },
     reducers: {
-        // bottleDeleted(state, action) {
-        //     state.entities = state.entities.filter((b) => b.id !== action.meta.arg);
-        // },
     },
     extraReducers: (builder) => (
         builder
@@ -80,7 +78,7 @@ const bottlesSlice = createSlice({
           })
         .addCase(deleteBottle.fulfilled, (state, action) => {
             state.status = "idle";
-            state.entities.filter((b) => b.id !== action.meta.arg);
+            state.entities = state.entities.filter((b) => b.id !== parseInt(action.meta.arg));
           })
     )
 })

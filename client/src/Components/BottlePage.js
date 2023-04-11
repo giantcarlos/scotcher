@@ -16,11 +16,11 @@ function BottlePage() {
 
     const handleDelete = () => {
         dispatch(deleteBottle(id))
-        const distillery = allDistilleries.find(d => d.id===parseInt(bottle.distillery_id))
-        const distilleryExists = bottles.findIndex(b => b.distillery_id===bottle.distillery_id) > -1;
+        const distillery = allDistilleries.find(d => d.id===bottle.distillery_id)
+        const distilleryExists = bottles.filter(b => b.distillery_id===distillery.id);
         if (!distilleryExists) {
-          dispatch(distilleryDeleted(distillery))
-          console.log(distillery)
+          dispatch(distilleryDeleted(distillery.id))
+          console.log(distillery.id)
         }
         navigate('/distilleries')
     }

@@ -28,7 +28,7 @@ function Login() {
       dispatch(fetchNotes())
       navigate('/');
     }
-  }, [user, dispatch])
+  }, [user, dispatch, navigate])
 
   return (
     <div>
