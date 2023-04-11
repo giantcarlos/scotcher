@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSessions } from './features/sessionsSlice';
 import { fetchDistilleries } from './features/distilleriesSlice';
 import { fetchBottles } from './features/bottlesSlice';
@@ -20,18 +20,24 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedIn = useSelector(state => state.sessions.loggedIn)
 
   useEffect (() => {
     dispatch(fetchSessions())
-      .then(dispatch(fetchBottles()))
-      .then(dispatch(fetchDistilleries()))
-      .then(dispatch(fetchAllDistilleries()))
-      .then(dispatch(fetchNotes()))
-  });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      dispatch(fetchBottles())
+      dispatch(fetchDistilleries())
+      dispatch(fetchAllDistilleries())
+      dispatch(fetchNotes())
+    }
+  }, [loggedIn, dispatch])
 
 
   return (
-    // <div className="background" style={{backgroundImage: "url(/scotchbg.png)"}}>
      <div> 
       <NavBar />
       <Routes>

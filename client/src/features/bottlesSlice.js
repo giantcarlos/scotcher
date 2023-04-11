@@ -34,9 +34,13 @@ const bottlesSlice = createSlice({
     initialState: {
         entities: [],
         errors: null,
+        updated: false,
         status: "idle",
     },
     reducers: {
+        stateUpdateReset(state) {
+            state.updated = false;
+        },
     },
     extraReducers: (builder) => (
         builder
@@ -57,6 +61,7 @@ const bottlesSlice = createSlice({
             } else {
                 state.entities.push(action.payload);
                 state.status = "idle";
+                state.updated = true;
                 state.errors = []
             }
           })
@@ -83,6 +88,6 @@ const bottlesSlice = createSlice({
     )
 })
 
-export const { bottleDeleted } = bottlesSlice.actions;
+export const { bottleDeleted, stateUpdateReset } = bottlesSlice.actions;
 
 export default bottlesSlice.reducer;

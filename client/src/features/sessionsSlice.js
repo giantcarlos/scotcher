@@ -19,15 +19,18 @@ const sessionsSlice = createSlice({
     name: "sessions",
     initialState: {
         entities: null, 
+        loggedIn: false,
         error: null,
         status: "idle",
     },
     reducers: {
         sessionsAdded(state, action) {
+            state.loggedIn = true;
             state.entities = action.payload;
         },
         sessionsDeleted(state) {
             state.entities = null;
+            state.loggedIn = false;
         },
     },
     extraReducers: (builder) => (
@@ -38,6 +41,7 @@ const sessionsSlice = createSlice({
         .addCase(fetchSessions.fulfilled, (state, action) => {
             state.entities = action.payload;
             state.status = "idle";
+            state.loggedIn = true;
           })
         .addCase(postSession.pending, (state) => {
             state.status = "loading";
@@ -48,6 +52,7 @@ const sessionsSlice = createSlice({
                 state.status = "idle"
             } else {
                 state.entities = action.payload;
+                state.loggedIn = true;
                 state.status = "idle";
                 state.errors = []
             }

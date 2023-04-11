@@ -27,9 +27,9 @@ function BottleEdit() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(patchBottle({formData, id}))
-    if (!errors) {
-        navigate(`/bottles/${id}`)
-    }
+    // if (!errors) {
+    //     navigate(`/bottles/${id}`)
+    // }
 } 
 
   const handleChange = (e) => {
