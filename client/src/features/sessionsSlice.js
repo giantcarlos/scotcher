@@ -19,13 +19,13 @@ const sessionsSlice = createSlice({
     name: "sessions",
     initialState: {
         entities: null, 
-        errors: null,
+        error: null,
         status: "idle",
     },
     reducers: {
-        // sessionsAdded(state, action) {
-        //     state.entities = action.payload;
-        // },
+        sessionsAdded(state, action) {
+            state.entities = action.payload;
+        },
         sessionsDeleted(state) {
             state.entities = null;
         },
@@ -43,8 +43,8 @@ const sessionsSlice = createSlice({
             state.status = "loading";
           })
         .addCase(postSession.fulfilled, (state, action) => {
-            if (action.payload.errors) {
-                state.errors = action.payload.errors
+            if (action.payload.error) {
+                state.error = action.payload.error
                 state.status = "idle"
             } else {
                 state.entities = action.payload;

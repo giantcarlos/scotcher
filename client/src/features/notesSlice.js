@@ -43,7 +43,7 @@ const notesSlice = createSlice({
             } else {
                 state.entities.push(action.payload);
                 state.status = "idle";
-                state.errors = null
+                state.errors = null;
             }
           })  
     )

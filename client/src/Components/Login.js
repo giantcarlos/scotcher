@@ -5,12 +5,13 @@ import { postSession } from '../features/sessionsSlice';
 import { fetchDistilleries } from '../features/distilleriesSlice';
 import { fetchBottles } from '../features/bottlesSlice';
 import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
+import { fetchNotes } from '../features/notesSlice';
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.sessions.entities)
-  const errors = useSelector(state => state.sessions.errors)
+  const errors = useSelector(state => state.sessions.error)
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
 
@@ -24,6 +25,7 @@ function Login() {
       dispatch(fetchBottles())
       dispatch(fetchDistilleries())
       dispatch(fetchAllDistilleries())
+      dispatch(fetchNotes())
       navigate('/');
     }
   }, [user, dispatch])

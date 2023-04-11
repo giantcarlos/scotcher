@@ -10,7 +10,6 @@ function NoteForm() {
     const errors = useSelector(state => state.notes.errors)
     const bottles = useSelector(state => state.bottles.entities)
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
-    // const [ errors, setErrors ] = useState(null);
     const [ formData, setFormData ] = useState({
         bottle_id: id,
         comment: "",
@@ -19,30 +18,7 @@ function NoteForm() {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(postNote(formData))
-        // if (!errors) {navigate(`/bottles/${id}`)}
       }
-
-    //   const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch(postNote(formData))
-    //     .then((r) => {
-    //     if (r.ok) {
-    //         r.json().then((data) => (data))
-    //         navigate('/bottles/${id}');
-    //   } else {
-    //     r.json().then((data) => setErrors(data.errors));
-    //   }
-    // })}
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //       await dispatch(postNote({formData}));
-    //       navigate(`/bottles/${id}`);
-    //     } catch(error) {
-    //         console.log(error)
-    //     }
-    //   };
 
       const handleChange = (e) => {
         setFormData({
