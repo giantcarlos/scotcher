@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { sessionsAdded } from '../features/sessionsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { postSession } from '../features/sessionsSlice';
 import { fetchDistilleries } from '../features/distilleriesSlice';
 import { fetchBottles } from '../features/bottlesSlice';
 import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
@@ -9,32 +9,24 @@ import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector(state => state.sessions.entities)
+  const errors = useSelector(state => state.sessions.errors)
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
-  const [ errors, setErrors ] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => {
-          dispatch(sessionsAdded(data))
-          dispatch(fetchBottles())
-          dispatch(fetchDistilleries())
-          dispatch(fetchAllDistilleries())
-        })
-        navigate('/');
-      } else {
-        r.json().then((err) => setErrors(err.error));
-      }
-    })
+    dispatch(postSession({ username, password }))
   }
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchBottles())
+      dispatch(fetchDistilleries())
+      dispatch(fetchAllDistilleries())
+      navigate('/');
+    }
+  }, [user, dispatch])
 
   return (
     <div>

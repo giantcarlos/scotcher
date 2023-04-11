@@ -6,16 +6,26 @@ export const fetchSessions = createAsyncThunk("sessions/fetchSessions", () => {
         .then((data) => data);
 })
 
+export const postSession = createAsyncThunk("sessions/postSession", ({ username, password }) => {
+    return fetch("/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ username, password })})
+        .then((response) => response.json())
+        .then((data) => (data))
+})
+
 const sessionsSlice = createSlice({
     name: "sessions",
     initialState: {
-        entities: {}, 
+        entities: null, 
+        errors: null,
         status: "idle",
     },
     reducers: {
-        sessionsAdded(state, action) {
-            state.entities = action.payload;
-        },
+        // sessionsAdded(state, action) {
+        //     state.entities = action.payload;
+        // },
         sessionsDeleted(state) {
             state.entities = null;
         },
@@ -29,9 +39,22 @@ const sessionsSlice = createSlice({
             state.entities = action.payload;
             state.status = "idle";
           })
+        .addCase(postSession.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(postSession.fulfilled, (state, action) => {
+            if (action.payload.errors) {
+                state.errors = action.payload.errors
+                state.status = "idle"
+            } else {
+                state.entities = action.payload;
+                state.status = "idle";
+                state.errors = []
+            }
+          })
     )
 });
 
-export const { sessionsAdded, sessionsDeleted, sessionsBottleDeleted } = sessionsSlice.actions;
+export const { sessionsAdded, sessionsDeleted } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;

@@ -15,10 +15,11 @@ function BottlePage() {
 
     const handleDelete = () => {
         dispatch(deleteBottle(id))
-        const distillery = allDistilleries.find(d => d.id===bottle.distillery_id)
+        const distillery = allDistilleries.find(d => d.id===parseInt(bottle.distillery_id))
         const distilleryExists = bottles.findIndex(b => b.distillery_id===bottle.distillery_id) > -1;
-        if (distilleryExists) {
+        if (!distilleryExists) {
           dispatch(distilleryDeleted(distillery))
+          console.log(distillery)
         }
         navigate('/distilleries')
     }

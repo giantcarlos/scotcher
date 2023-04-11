@@ -20,7 +20,7 @@ const allDistilleriesSlice = createSlice({
     name: "allDistilleries",
     initialState: {
         entities: [], 
-        errors: [],
+        errors: null,
         status: "idle",
     },
     reducers: {
@@ -44,12 +44,10 @@ const allDistilleriesSlice = createSlice({
             } else {
                 state.entities.push(action.payload);
                 state.status = "idle";
-                state.errors = []
+                state.errors = null
             }
           })
     )
 })
-
-export const { allDistilleryAdded } = allDistilleriesSlice.actions;
 
 export default allDistilleriesSlice.reducer;

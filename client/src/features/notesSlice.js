@@ -19,13 +19,10 @@ const notesSlice = createSlice({
     name: "notes",
     initialState: {
         entities: [], 
-        errors: [],
+        errors: null,
         status: "idle",
     },
     reducers: {
-        // noteAdded(state, action) {
-        //     state.entities.push(action.payload);
-        // }
     },
     extraReducers: (builder) => (
         builder
@@ -46,12 +43,10 @@ const notesSlice = createSlice({
             } else {
                 state.entities.push(action.payload);
                 state.status = "idle";
-                state.errors = []
+                state.errors = null
             }
           })  
     )
 })
-
-export const { noteAdded } = notesSlice.actions;
 
 export default notesSlice.reducer;

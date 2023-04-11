@@ -6,8 +6,7 @@ export const fetchBottles = createAsyncThunk("bottles/fetchBottles", () => {
         .then((data) => data);
 })
 
-export const postBottle = createAsyncThunk("bottles/postBottle", 
-    async (formData) => {
+export const postBottle = createAsyncThunk("bottles/postBottle", (formData) => {
     return fetch("/bottles", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -16,8 +15,7 @@ export const postBottle = createAsyncThunk("bottles/postBottle",
         .then((data) => (data))
 })
 
-export const patchBottle = createAsyncThunk("bottles/patchBottle", 
-    async ({formData, id}) => {
+export const patchBottle = createAsyncThunk("bottles/patchBottle", ({formData, id}) => {
     return fetch(`/bottles/${id}`, {
         method: "PATCH",
         headers: {"Content-Type": "application/json"},
@@ -26,19 +24,22 @@ export const patchBottle = createAsyncThunk("bottles/patchBottle",
         .then((data) => (data))
 })
 
-export const deleteBottle = createAsyncThunk("bottles/deleteBottle", 
-    async (id) => {
+export const deleteBottle = createAsyncThunk("bottles/deleteBottle", (id) => {
     return fetch(`/bottles/${id}`, { method: "DELETE" })
+        .then(() => (bottleDeleted(id)))
 })
 
 const bottlesSlice = createSlice({
     name: "bottles",
     initialState: {
         entities: [],
-        errors: [],
+        errors: null,
         status: "idle",
     },
     reducers: {
+        // bottleDeleted(state, action) {
+        //     state.entities = state.entities.filter((b) => b.id !== action.meta.arg);
+        // },
     },
     extraReducers: (builder) => (
         builder
@@ -80,11 +81,11 @@ const bottlesSlice = createSlice({
           })
         .addCase(deleteBottle.fulfilled, (state, action) => {
             state.status = "idle";
-            state.entities = state.entities.filter((b) => b.id !== action.payload);
+            state.entities.filter((b) => b.id !== action.meta.arg);
           })
     )
 })
 
-export const { bottleAdded, bottleUpdated, bottleDeleted } = bottlesSlice.actions;
+export const { bottleDeleted } = bottlesSlice.actions;
 
 export default bottlesSlice.reducer;

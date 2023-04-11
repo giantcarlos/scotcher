@@ -25,7 +25,7 @@ function BottleForm() {
   function handleSubmit(e) {
       e.preventDefault();
       dispatch(postBottle(formData));
-      const distillery = allDistilleries.find(d => d.id===formData.distillery_id)
+      const distillery = allDistilleries.find((d) => d.id===parseInt(formData.distillery_id))
       const distilleryExists = distilleries.findIndex(d => d?.id ===formData.distillery_id) > -1;
         if (!distilleryExists) {(dispatch(distilleryAdded(distillery)))}
   }
