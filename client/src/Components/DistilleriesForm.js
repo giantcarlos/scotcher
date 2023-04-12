@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { postAllDistillery } from '../features/allDistilleriesSlice';
+import { stateUpdateReset } from '../features/allDistilleriesSlice';
 
 function DistilleriesForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const errors = useSelector(state => state.allDistilleries.errors)
+    const updated = useSelector(state => state.allDistilleries.updated)
     const [ name, setName ] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(postAllDistillery(name))
-        // if (!errors) {navigate(`/bottles/new`)}
       }
+
+    useEffect(() => {
+        if (updated) {
+            navigate('/bottles/new');
+            dispatch(stateUpdateReset());
+        }
+    })
 
   return (
     <div>

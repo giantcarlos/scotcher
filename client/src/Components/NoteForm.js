@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postNote } from '../features/notesSlice';
+import { stateUpdateReset } from '../features/notesSlice';
 
 function NoteForm() {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ function NoteForm() {
     const { id } = useParams();
     const errors = useSelector(state => state.notes.errors)
     const bottles = useSelector(state => state.bottles.entities)
+    const updated = useSelector(state => state.notes.updated)
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
     const [ formData, setFormData ] = useState({
         bottle_id: id,
@@ -19,6 +21,13 @@ function NoteForm() {
         e.preventDefault();
         dispatch(postNote(formData))
       }
+
+      useEffect(() => {
+        if (updated) {
+            navigate(`/bottles/${id}`);
+            dispatch(stateUpdateReset());
+        }
+    })
 
       const handleChange = (e) => {
         setFormData({
