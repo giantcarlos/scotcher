@@ -1,14 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import Login from './Login';
 import DistilleryCard from './DistilleryCard';
+import { fetchDistilleries } from '../features/distilleriesSlice';
 
 function Distilleries() {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.sessions.entities)
   const distilleries = useSelector(state => state.distilleries.entities)
   const bottles = useSelector(state => state.bottles.entities)
 
   const distilleryList = () => distilleries?.map((distillery, key) => <DistilleryCard distillery={distillery} key={key} />)
+
+  useEffect(() => {
+    dispatch(fetchDistilleries())
+  }, [dispatch])
 
   if (!user) return <Login />;
 

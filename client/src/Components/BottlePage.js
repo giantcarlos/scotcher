@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { distilleryDeleted } from '../features/distilleriesSlice';
 import { deleteBottle } from '../features/bottlesSlice';
 import { stateUpdateReset } from '../features/bottlesSlice';
 
@@ -11,7 +10,6 @@ function BottlePage() {
     const { id } = useParams();
     const bottles = useSelector(state => state.bottles.entities);
     const notes = useSelector(state => state.notes.entities);
-    const distilleries = useSelector(state => state.distilleries.entities);
     const updated = useSelector(state => state.bottles.updated);
     const bottle = bottles?.find(bottle => bottle.id===parseInt(id));
     const bottleNotes = notes.filter(n => n.bottle_id===parseInt(id));
@@ -22,8 +20,6 @@ function BottlePage() {
 
     useEffect(() => {
         if (updated) {
-            const distilleryExists = distilleries.find(d => d.bottles===null);
-            if (!distilleryExists) {dispatch(distilleryDeleted(distilleryExists))}
             navigate('/distilleries')
             dispatch(stateUpdateReset())
         }

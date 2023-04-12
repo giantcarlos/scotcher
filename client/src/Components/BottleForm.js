@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { postBottle } from '../features/bottlesSlice';
-import { distilleryAdded } from "../features/distilleriesSlice";
 import { stateUpdateReset } from '../features/bottlesSlice';
 import Login from './Login';
 
 function BottleForm() {
   const user = useSelector(state => state.sessions.entities)
-  const distilleries = useSelector(state => state.distilleries.entities)
   const allDistilleries = useSelector(state => state.allDistilleries.entities)
   const errors = useSelector(state => state.bottles.errors)
   const updated = useSelector(state => state.bottles.updated)
@@ -31,9 +29,6 @@ function BottleForm() {
 
   useEffect(() => {
     if (updated) {
-      const distillery = allDistilleries.find((d) => d.id===parseInt(formData.distillery_id))
-      const distilleryExists = distilleries.filter(d => d?.id===formData.distillery_id);
-        if (!distilleryExists) {dispatch(distilleryAdded(distillery))}
       navigate('/distilleries')
       dispatch(stateUpdateReset())
     }
