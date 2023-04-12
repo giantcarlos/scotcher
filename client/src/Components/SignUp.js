@@ -1,45 +1,30 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { sessionsAdded } from '../features/sessionsSlice';
-import { fetchDistilleries } from '../features/distilleriesSlice';
-import { fetchBottles } from '../features/bottlesSlice';
-import { fetchAllDistilleries } from '../features/allDistilleriesSlice';
+import { postSignup, postSession } from '../features/sessionsSlice';
+import { stateUpdateReset } from '../features/sessionsSlice';
 
 function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const errors = useSelector(state => state.sessions.errors)
+  const updated = useSelector(state => state.sessions.updated)
   const [ username, setUsername ] = useState("");
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
-  const [ errors, setErrors ] = useState([]);
 
   function handleSubmit(e) {
-    e.preventDefault();
-    fetch("/signup", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            username,
-            email,
-            password
-        }),
-    }).then((r) => {
-        if (r.ok) {
-          r.json().then((user) => {
-            dispatch(sessionsAdded(user))
-            dispatch(fetchBottles())
-            dispatch(fetchDistilleries())
-            dispatch(fetchAllDistilleries())
-          })
-            navigate('/');
-        } else {
-            r.json().then((err) => setErrors(err.errors));
-        }
-    });
-}
+      e.preventDefault();
+      dispatch(postSignup({ username, email, password }))
+  }
+
+  useEffect(() => {
+    if (updated) {
+        dispatch(postSession({ username, password }))
+        navigate('/');
+        dispatch(stateUpdateReset());
+    }
+  })
 
   return (
     <div>

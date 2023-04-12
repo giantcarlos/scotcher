@@ -15,13 +15,22 @@ export const postSession = createAsyncThunk("sessions/postSession", ({ username,
         .then((data) => (data))
 })
 
+export const postSignup = createAsyncThunk("sessions/postSignup", ({ username, email, password }) => {
+    return fetch("/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ username, email, password })})
+        .then((response) => response.json())
+        .then((data) => (data))
+})
+
 const sessionsSlice = createSlice({
     name: "sessions",
     initialState: {
         entities: null, 
         loggedIn: false,
         updated: false,
-        error: null,
+        errors: null,
         status: "idle",
     },
     reducers: {
@@ -52,14 +61,27 @@ const sessionsSlice = createSlice({
           })
         .addCase(postSession.fulfilled, (state, action) => {
             if (action.payload.error) {
-                state.error = action.payload.error
+                state.errors = action.payload.error
                 state.status = "idle"
             } else {
                 state.entities = action.payload;
                 state.loggedIn = true;
                 state.updated = true;
                 state.status = "idle";
-                state.errors = []
+                state.errors = null;
+            }
+          })
+        .addCase(postSignup.pending, (state) => {
+            state.status = "loading";
+          })
+        .addCase(postSignup.fulfilled, (state, action) => {
+            if (action.payload.errors) {
+                state.errors = action.payload.errors;
+                state.status = "idle";
+            } else {
+                state.updated = true;
+                state.status = "idle";
+                state.errors = null;
             }
           })
     )

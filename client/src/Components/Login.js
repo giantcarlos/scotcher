@@ -7,7 +7,7 @@ import { stateUpdateReset } from '../features/sessionsSlice';
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const errors = useSelector(state => state.sessions.error)
+  const errors = useSelector(state => state.sessions.errors)
   const updated = useSelector(state => state.sessions.updated)
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
