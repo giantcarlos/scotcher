@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSessions } from './features/sessionsSlice';
 import { fetchDistilleries } from './features/distilleriesSlice';
@@ -20,7 +20,6 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const loggedIn = useSelector(state => state.sessions.loggedIn)
 
   useEffect (() => {

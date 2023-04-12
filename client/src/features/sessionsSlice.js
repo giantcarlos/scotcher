@@ -20,6 +20,7 @@ const sessionsSlice = createSlice({
     initialState: {
         entities: null, 
         loggedIn: false,
+        updated: false,
         error: null,
         status: "idle",
     },
@@ -31,6 +32,9 @@ const sessionsSlice = createSlice({
         sessionsDeleted(state) {
             state.entities = null;
             state.loggedIn = false;
+        },
+        stateUpdateReset(state) {
+            state.updated = false;
         },
     },
     extraReducers: (builder) => (
@@ -53,6 +57,7 @@ const sessionsSlice = createSlice({
             } else {
                 state.entities = action.payload;
                 state.loggedIn = true;
+                state.updated = true;
                 state.status = "idle";
                 state.errors = []
             }
@@ -60,6 +65,6 @@ const sessionsSlice = createSlice({
     )
 });
 
-export const { sessionsAdded, sessionsDeleted } = sessionsSlice.actions;
+export const { sessionsAdded, sessionsDeleted, stateUpdateReset } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;
