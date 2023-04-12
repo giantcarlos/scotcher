@@ -30,6 +30,7 @@ const sessionsSlice = createSlice({
         entities: null, 
         loggedIn: false,
         updated: false,
+        error: null,
         errors: null,
         status: "idle",
     },
@@ -61,14 +62,14 @@ const sessionsSlice = createSlice({
           })
         .addCase(postSession.fulfilled, (state, action) => {
             if (action.payload.error) {
-                state.errors = action.payload.error
+                state.error = action.payload.error
                 state.status = "idle"
             } else {
                 state.entities = action.payload;
                 state.loggedIn = true;
                 state.updated = true;
                 state.status = "idle";
-                state.errors = null;
+                state.error = null;
             }
           })
         .addCase(postSignup.pending, (state) => {
@@ -79,7 +80,6 @@ const sessionsSlice = createSlice({
                 state.errors = action.payload.errors;
                 state.status = "idle";
             } else {
-                state.updated = true;
                 state.status = "idle";
                 state.errors = null;
             }
