@@ -53,9 +53,14 @@ const sessionsSlice = createSlice({
             state.status = "loading";
           })
         .addCase(fetchSessions.fulfilled, (state, action) => {
+            if (action.payload.errors) {
+                state.status = "idle"
+            } else {
             state.entities = action.payload;
-            state.status = "idle";
             state.loggedIn = true;
+            state.error = null;
+            state.status = "idle";
+            }
           })
         .addCase(postSession.pending, (state) => {
             state.status = "loading";
@@ -67,9 +72,8 @@ const sessionsSlice = createSlice({
             } else {
                 state.entities = action.payload;
                 state.loggedIn = true;
-                state.updated = true;
-                state.status = "idle";
                 state.error = null;
+                state.status = "idle";
             }
           })
         .addCase(postSignup.pending, (state) => {
@@ -80,9 +84,9 @@ const sessionsSlice = createSlice({
                 state.errors = action.payload.errors;
                 state.status = "idle";
             } else {
-                state.status = "idle";
                 state.updated = true;
                 state.errors = null;
+                state.status = "idle";
             }
           })
     )

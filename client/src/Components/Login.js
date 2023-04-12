@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postSession } from '../features/sessionsSlice';
-import { stateUpdateReset } from '../features/sessionsSlice';
 
 function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const errors = useSelector(state => state.sessions.error)
-  const updated = useSelector(state => state.sessions.updated)
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
 
@@ -16,13 +13,6 @@ function Login() {
     e.preventDefault();
     dispatch(postSession({ username, password }))
   }
-
-  useEffect(() => {
-    if (updated) {
-        navigate('/')
-        dispatch(stateUpdateReset())
-    }
-})
 
   return (
     <div>
