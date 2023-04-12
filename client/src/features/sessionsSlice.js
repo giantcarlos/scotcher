@@ -81,6 +81,7 @@ const sessionsSlice = createSlice({
                 state.status = "idle";
             } else {
                 state.status = "idle";
+                state.updated = true;
                 state.errors = null;
             }
           })
