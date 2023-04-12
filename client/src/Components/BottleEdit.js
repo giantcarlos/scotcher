@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { patchBottle } from '../features/bottlesSlice';
+import { stateUpdateReset } from '../features/bottlesSlice';
 
 function BottleEdit() {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function BottleEdit() {
   const { id } = useParams();
   const errors = useSelector(state => state.bottles.errors)
   const bottles = useSelector(state => state.bottles.entities)
+  const updated = useSelector(state => state.bottles.updated);
   const bottle = bottles?.find(bottle => bottle.id===parseInt(id))
   const [ formData, setFormData ] = useState({
     distillery_id: bottles?.find(bottle => bottle.id===parseInt(id))?.distillery_id,
@@ -27,10 +29,14 @@ function BottleEdit() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(patchBottle({formData, id}))
-    // if (!errors) {
-    //     navigate(`/bottles/${id}`)
-    // }
 } 
+
+    useEffect(() => {
+        if (updated) {
+            navigate(`/bottles/${id}`)
+            dispatch(stateUpdateReset())
+        }
+    })
 
   const handleChange = (e) => {
     setFormData({

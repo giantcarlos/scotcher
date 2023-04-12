@@ -75,6 +75,7 @@ const bottlesSlice = createSlice({
             } else {
                 state.entities = state.entities.map(b => b.id === action.payload.id ? {...b, ...action.payload} : b);
                 state.status = "idle";
+                state.updated = true;
                 state.errors = []
             }
           })
@@ -82,8 +83,9 @@ const bottlesSlice = createSlice({
             state.status = "loading";
           })
         .addCase(deleteBottle.fulfilled, (state, action) => {
-            state.status = "idle";
             state.entities = state.entities.filter((b) => b.id !== parseInt(action.meta.arg));
+            state.status = "idle";
+            state.updated = true;
           })
     )
 })

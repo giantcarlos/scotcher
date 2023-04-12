@@ -32,7 +32,7 @@ function BottleForm() {
   useEffect(() => {
     if (updated) {
       const distillery = allDistilleries.find((d) => d.id===parseInt(formData.distillery_id))
-      const distilleryExists = distilleries.find(d => d?.id===formData.distillery_id);
+      const distilleryExists = distilleries.filter(d => d?.id===formData.distillery_id);
         if (!distilleryExists) {dispatch(distilleryAdded(distillery))}
       navigate('/distilleries')
       dispatch(stateUpdateReset())
