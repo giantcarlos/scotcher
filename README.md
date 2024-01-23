@@ -23,11 +23,11 @@ Scotcher is a journal application to help users track their Scotch and Scotch-ad
 - Active Record
 
 
-### **Project Link**
+### **Sample Account Login**
 ---
 
-- https://scotcher.onrender.com/
-- Full journal account login username: gian, password: 1234
+- Username: gian
+- Password: 1234
 
 
 
