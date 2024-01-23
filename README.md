@@ -23,14 +23,6 @@ Scotcher is a journal application to help users track their Scotch and Scotch-ad
 - Active Record
 
 
-### **Instructions**
----
-
-- Run client with npm start --prefix client on localhost:4000
-- Run server with rails s on localhost:3000
-- To login with an account with a full collection use username: gian, password: 1234
-
-
 ### **Github**
 ---
 
@@ -41,6 +33,14 @@ Scotcher is a journal application to help users track their Scotch and Scotch-ad
 ---
 
 - https://youtu.be/uLI89WSmleM
+
+
+### **Instructions**
+---
+
+- Run client with npm start --prefix client on localhost:4000
+- Run server with rails s on localhost:3000
+- To login with an account with a full collection use username: gian, password: 1234
 
 
 ### **Project Blog**
